@@ -46,8 +46,8 @@ export default function DominoEffect() {
     if (stage === 'idle') {
       timer = setTimeout(() => setStage('cascade'), 1000);
     } else if (stage === 'cascade') {
-      // Freeze right when they hit the giant block
-      timer = setTimeout(() => setStage('frozen'), 1500); 
+      // Slower cascade takes ~2.8s to reach the giant block
+      timer = setTimeout(() => setStage('frozen'), 2800); 
     } else if (stage === 'frozen') {
       // Give the user 3 seconds to click Donate. If they fail, collapse!
       timer = setTimeout(() => setStage('collapse'), 3000);
@@ -86,14 +86,14 @@ export default function DominoEffect() {
   };
 
   // Block definitions carefully measured to fall FORWARDS (towards the background)
-  // Front block falls, top moves from standing (-90) towards flat on floor (0).
+  // Delays increased for a slower, heavier cinematic fall
   const blocks = [
     { id: 0, bottom: 20, w: 25, h: 50, d: 8, label: "Sem Kits", isGiant: false, delay: 0, cascadeAngle: -70, savedAngle: -50, collapseAngle: -15 },
-    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.15, cascadeAngle: -73, savedAngle: -53, collapseAngle: -12 },
-    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.3, cascadeAngle: -76, savedAngle: -56, collapseAngle: -9 },
-    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.45, cascadeAngle: -79, savedAngle: -59, collapseAngle: -6 },
-    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.6, cascadeAngle: -82, savedAngle: -62, collapseAngle: -3 },
-    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.75, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
+    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.3, cascadeAngle: -73, savedAngle: -53, collapseAngle: -12 },
+    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.6, cascadeAngle: -76, savedAngle: -56, collapseAngle: -9 },
+    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.9, cascadeAngle: -79, savedAngle: -59, collapseAngle: -6 },
+    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 1.2, cascadeAngle: -82, savedAngle: -62, collapseAngle: -3 },
+    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 1.5, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
   ];
 
   // Generate 100 donation boxes for a massive, professional rain effect
@@ -276,8 +276,8 @@ export default function DominoEffect() {
                    }}
                    transition={{
                      type: 'spring', 
-                     stiffness: block.isGiant ? 80 : 150, 
-                     damping: block.isGiant ? 12 : 15, 
+                     stiffness: block.isGiant ? 50 : 80, 
+                     damping: block.isGiant ? 15 : 20, 
                      // Only apply staggered delay during cascade or collapse
                      delay: (stage === 'cascade' || stage === 'collapse') ? block.delay : 0 
                    }}
