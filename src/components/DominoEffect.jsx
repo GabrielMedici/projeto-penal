@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingDown, RotateCcw, Heart, Play } from 'lucide-react';
+import { TrendingDown, RotateCcw, Heart, Play, AlertTriangle } from 'lucide-react';
 
 const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
   return (
@@ -26,7 +26,7 @@ const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
       {/* Floating Label specific to 3D orientation */}
       {label && (
         <div 
-          className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-bold px-3 py-1.5 rounded-sm backdrop-blur-md border ${isGiant ? 'bg-burgundy-cta/30 text-red-400 border-burgundy-cta/50 shadow-[0_0_20px_rgba(139,28,49,0.5)] -top-12' : 'bg-slate-800 text-slate-300 shadow-lg border-slate-700 -top-10'}`} 
+          className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-bold px-3 py-1.5 rounded-sm backdrop-blur-md border transition-opacity duration-300 ${isGiant ? 'bg-burgundy-cta/30 text-red-400 border-burgundy-cta/50 shadow-[0_0_20px_rgba(139,28,49,0.5)] -top-12' : 'bg-slate-800 text-slate-300 shadow-lg border-slate-700 -top-10'}`} 
           style={{ transform: `translateZ(${d/2 + 10}px)` }}
         >
           {label}
@@ -37,21 +37,23 @@ const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
 };
 
 export default function DominoEffect() {
-  // 'idle', 'cascade', 'frozen', 'saved', 'eureka'
+  // 'idle', 'cascade', 'frozen', 'collapse', 'saved', 'eureka'
   const [stage, setStage] = useState('idle'); 
 
-  // Auto-start cascade if the user scrolls to it
+  // Cinematic Gameplay Loop
   useEffect(() => {
     let timer;
     if (stage === 'idle') {
-      timer = setTimeout(() => {
-        setStage('cascade');
-      }, 1000);
+      timer = setTimeout(() => setStage('cascade'), 1000);
     } else if (stage === 'cascade') {
-      // Freeze right before the giant falls completely
-      timer = setTimeout(() => {
-        setStage('frozen');
-      }, 1500); 
+      // Freeze right when they hit the giant block
+      timer = setTimeout(() => setStage('frozen'), 1500); 
+    } else if (stage === 'frozen') {
+      // Give the user 3 seconds to click Donate. If they fail, collapse!
+      timer = setTimeout(() => setStage('collapse'), 3000);
+    } else if (stage === 'collapse' || stage === 'eureka') {
+      // Reset the scene 6 seconds after the outcome
+      timer = setTimeout(() => setStage('idle'), 6000);
     }
     return () => clearTimeout(timer);
   }, [stage]);
@@ -60,7 +62,7 @@ export default function DominoEffect() {
     setStage('saved');
     setTimeout(() => {
       setStage('eureka');
-    }, 2000); // Sequence completes after 2s
+    }, 2000); // Show modal after boxes fall
   };
 
   const handleReset = () => {
@@ -83,21 +85,20 @@ export default function DominoEffect() {
     border: 'border-amber-300/30'
   };
 
-  // Block definitions carefully measured so distance < height
-  // They are arrayed from FRONT (closest to camera) to BACK (farthest).
-  // Falling BACKWARDS means rotateX goes from -90 towards -180.
+  // Block definitions carefully measured to fall FORWARDS (towards the background)
+  // Front block falls, top moves from standing (-90) towards flat on floor (0).
   const blocks = [
-    { id: 0, bottom: 20, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, cascadeAngle: -160, savedAngle: -165 },
-    { id: 1, bottom: 70, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, cascadeAngle: -150, savedAngle: -155 },
-    { id: 2, bottom: 150, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, cascadeAngle: -120, savedAngle: -145 },
-    { id: 3, bottom: 270, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, cascadeAngle: -100, savedAngle: -135 },
+    { id: 0, bottom: 20, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, cascadeAngle: -70, savedAngle: -50, collapseAngle: -15 },
+    { id: 1, bottom: 70, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, cascadeAngle: -75, savedAngle: -55, collapseAngle: -10 },
+    { id: 2, bottom: 150, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, cascadeAngle: -80, savedAngle: -60, collapseAngle: -5 },
+    { id: 3, bottom: 270, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
   ];
 
   // Generate 25 donation boxes for the rain effect
   const donationBoxes = Array.from({ length: 25 }).map((_, i) => ({
     id: i,
     xOffset: (Math.random() - 0.5) * 120, // Spread horizontally BEHIND giant
-    yOffset: 280 + (Math.random() * 40), // Y position BEHIND the giant block
+    yOffset: 290 + (Math.random() * 40), // Y position BEHIND the giant block
     delay: (Math.random() * 0.4), // Rain drops fast when clicked
     dropHeight: 400 + (Math.random() * 300), // Height from which it drops
     finalZ: (i % 5) * 15, // Stack them up vertically
@@ -111,7 +112,7 @@ export default function DominoEffect() {
       <motion.div 
         className="absolute inset-0 pointer-events-none"
         initial={{ background: 'radial-gradient(circle at 50% 50%, rgba(212,175,55,0.02) 0%, rgba(15,23,42,1) 70%)' }}
-        animate={{ background: stage === 'eureka' ? 'radial-gradient(circle at 50% 50%, rgba(212,175,55,0.08) 0%, rgba(15,23,42,1) 70%)' : 'radial-gradient(circle at 50% 50%, rgba(212,175,55,0.02) 0%, rgba(15,23,42,1) 70%)' }}
+        animate={{ background: stage === 'eureka' ? 'radial-gradient(circle at 50% 50%, rgba(212,175,55,0.08) 0%, rgba(15,23,42,1) 70%)' : (stage === 'collapse' ? 'radial-gradient(circle at 50% 50%, rgba(139,28,49,0.05) 0%, rgba(15,23,42,1) 70%)' : 'radial-gradient(circle at 50% 50%, rgba(212,175,55,0.02) 0%, rgba(15,23,42,1) 70%)') }}
         transition={{ duration: 2 }}
       />
 
@@ -125,7 +126,7 @@ export default function DominoEffect() {
             O Efeito Dominó
           </h2>
           <p className="text-slate-400 font-medium text-lg mb-0">
-            A falta de pequenos itens gera um colapso gigante. Veja a reação em cadeia e aja no momento crítico.
+            A falta de pequenos itens na base causa um colapso em cadeia. Assista à simulação e intervenha antes da catástrofe.
           </p>
         </div>
 
@@ -143,7 +144,10 @@ export default function DominoEffect() {
                   exit={{ opacity: 0, scale: 0.8 }}
                   className="flex flex-col items-center"
                 >
-                  <p className="text-amber-500 font-bold mb-4 animate-pulse uppercase tracking-widest text-sm glow-amber-text">O sistema vai colapsar!</p>
+                  <div className="flex items-center gap-2 text-red-500 font-bold mb-4 animate-pulse uppercase tracking-widest text-sm drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                    <AlertTriangle size={18} />
+                    Risco de Colapso Crítico!
+                  </div>
                   <button 
                     onClick={handleDonate}
                     className="btn-primary flex items-center gap-2 scale-110 shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]"
@@ -151,6 +155,25 @@ export default function DominoEffect() {
                     <Heart size={20} className="animate-bounce" />
                     Fazer Doação Urgente
                   </button>
+                  <div className="mt-4 w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-red-500"
+                      initial={{ width: "100%" }}
+                      animate={{ width: "0%" }}
+                      transition={{ duration: 3, ease: "linear" }} // 3 seconds to click
+                    />
+                  </div>
+                </motion.div>
+              ) : stage === 'collapse' ? (
+                <motion.div 
+                  key="collapsed"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col items-center"
+                >
+                  <p className="text-red-500 font-bold uppercase tracking-widest text-sm mb-2 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">O Sistema Caiu</p>
+                  <p className="text-slate-400 text-center text-sm">O gasto será milionário porque a prevenção não aconteceu.</p>
                 </motion.div>
               ) : stage === 'idle' || stage === 'cascade' ? (
                 <motion.div 
@@ -208,7 +231,7 @@ export default function DominoEffect() {
                </motion.div>
              ))}
 
-             {/* Obsidian Dominos (The Chain Reaction falling BACKWARDS) */}
+             {/* Obsidian Dominos */}
              {blocks.map((block) => {
                // Determine target rotation based on cinematic state
                let targetRotateX = -90; // Standing up
@@ -216,6 +239,8 @@ export default function DominoEffect() {
                  targetRotateX = block.cascadeAngle; 
                } else if (stage === 'saved' || stage === 'eureka') {
                  targetRotateX = block.savedAngle;
+               } else if (stage === 'collapse') {
+                 targetRotateX = block.collapseAngle;
                }
 
                return (
@@ -236,15 +261,15 @@ export default function DominoEffect() {
                      type: 'spring', 
                      stiffness: block.isGiant ? 80 : 150, 
                      damping: block.isGiant ? 12 : 15, 
-                     // Only apply delay during the initial cascade, otherwise respond instantly
-                     delay: stage === 'cascade' ? block.delay : 0 
+                     // Only apply staggered delay during cascade or collapse
+                     delay: (stage === 'cascade' || stage === 'collapse') ? block.delay : 0 
                    }}
                  >
                    {/* Realistic Cast Shadow */}
                    <motion.div 
-                     className="absolute bottom-0 left-0 w-full bg-black/70 origin-bottom blur-lg" 
+                     className="absolute bottom-0 left-0 w-full bg-black/70 origin-bottom blur-lg transition-opacity duration-500" 
                      style={{ height: block.h * 1.5, transform: 'rotateX(90deg) translateZ(-2px)' }} 
-                     animate={{ opacity: stage === 'idle' ? 0.6 : (targetRotateX === -180 ? 0 : 0.4) }}
+                     animate={{ opacity: stage === 'idle' ? 0.6 : (targetRotateX === 0 ? 0.1 : 0.4) }}
                    />
                    
                    <Block3D w={block.w} h={block.h} d={block.d} colors={obsidianColors} isGiant={block.isGiant} label={block.label} />
