@@ -25,7 +25,7 @@ export default function FamilySection() {
       <div className="section-container px-6">
         
         {/* LEGAL FOUNDATION HEADER */}
-        <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
+        <div id="fundamentacao" className="text-center mb-16 animate-on-scroll animate-fade-in-up scroll-mt-24">
           <span className="inline-block text-burgundy-cta text-sm font-bold uppercase tracking-widest mb-3">
             Fundamentação Legal
           </span>
