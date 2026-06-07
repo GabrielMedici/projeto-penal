@@ -470,23 +470,27 @@
     print-color-adjust: exact !important;
   }
 
-  /* Force animations to complete state */
+  /* Force animations to complete state, and disable heavy filters for print performance */
   .animate-on-scroll,
   .animate-fade-in-up,
   .animate-slide-in-right,
-  .animate-slide-in-left {
+  .animate-slide-in-left,
+  * {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
     transition: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
   }
   
-  /* Prevent page breaks inside important components */
+  /* Prevent page breaks inside smaller components only. 
+     NEVER put this on large containers like 'section' or it crashes the print preview! */
   .card-elevated,
   .blockquote-styled,
   .rounded-2xl,
   .glass-card,
-  section,
   img,
   video {
     break-inside: avoid;
