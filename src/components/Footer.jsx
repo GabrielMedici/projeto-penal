@@ -1,4 +1,4 @@
-import { Github, FileText, ArrowUp } from 'lucide-react';
+import { Code, FileText, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
   const scrollToTop = (e) => {
@@ -43,7 +43,7 @@ export default function Footer() {
               <FileText size={16} /> Relatório
             </a>
             <a href="https://github.com/GabrielMedici/projeto-penal" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-gold-accent transition-colors flex items-center gap-1 text-sm">
-              <Github size={16} /> Código-Fonte
+              <Code size={16} /> Código-Fonte
             </a>
           </div>
         </div>
