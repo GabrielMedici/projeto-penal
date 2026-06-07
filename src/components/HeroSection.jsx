@@ -18,8 +18,17 @@ export default function HeroSection() {
               </span>
             </div>
 
+            {/* Logo */}
+            <div className="animate-fade-in-up mb-6">
+              <img 
+                src="/images/logo_efeito_rebote.png" 
+                alt="Logo Efeito Rebote" 
+                className="w-48 md:w-56 lg:w-64 h-auto drop-shadow-xl" 
+              />
+            </div>
+
             {/* Title */}
-            <h1 className="animate-fade-in-up delay-100 text-5xl md:text-6xl lg:text-7xl font-extrabold text-navy-900 leading-[1.05] tracking-tight mb-6">
+            <h1 className="animate-fade-in-up delay-100 text-5xl md:text-6xl lg:text-7xl font-extrabold text-navy-900 leading-[1.05] tracking-tight mb-6 hidden md:block">
               EFEITO
               <br />
               <span className="text-burgundy-cta">REBOTE</span>
