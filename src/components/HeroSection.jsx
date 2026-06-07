@@ -48,18 +48,20 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Visual Placeholder */}
-          <div className="animate-fade-in-up delay-500 relative flex justify-center items-center">
+          {/* Right Column: Visual Component */}
+          <div className="animate-fade-in-up delay-500 relative flex justify-center items-center w-full aspect-square max-w-[28rem] mx-auto">
             {/* Glowing Rings behind logo */}
-            <div className="absolute w-64 h-64 md:w-96 md:h-96 bg-gold-accent/20 rounded-full blur-[80px] animate-pulse"></div>
-            <div className="absolute w-48 h-48 md:w-72 md:h-72 border border-amber-500/30 rounded-full animate-[spin_20s_linear_infinite]"></div>
-            <div className="absolute w-56 h-56 md:w-80 md:h-80 border border-amber-500/10 rounded-full animate-[spin_30s_linear_reverse_infinite]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gold-accent/15 rounded-full blur-[80px] animate-pulse pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] border border-amber-500/30 rounded-full animate-[spin_20s_linear_infinite] pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-amber-500/10 rounded-full animate-[spin_30s_linear_reverse_infinite] pointer-events-none"></div>
             
-            <img 
-              src="/images/logo_efeito_rebote.png" 
-              alt="Logo Efeito Rebote" 
-              className="w-64 md:w-96 lg:w-[32rem] h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] relative z-10 transform scale-110 md:scale-125 lg:scale-150" 
-            />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
+              <img 
+                src="/images/logo_efeito_rebote.png" 
+                alt="Logo Efeito Rebote" 
+                className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] scale-125" 
+              />
+            </div>
           </div>
 
 
