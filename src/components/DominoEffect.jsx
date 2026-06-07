@@ -96,16 +96,26 @@ export default function DominoEffect() {
     { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.75, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
   ];
 
-  // Generate 25 donation boxes for the rain effect
-  const donationBoxes = Array.from({ length: 25 }).map((_, i) => ({
-    id: i,
-    xOffset: (Math.random() - 0.5) * 120, // Spread horizontally BEHIND giant
-    yOffset: 380 + (Math.random() * 40), // Y position BEHIND the giant block
-    delay: (Math.random() * 0.4), // Rain drops fast when clicked
-    dropHeight: 400 + (Math.random() * 300), // Height from which it drops
-    finalZ: (i % 5) * 15, // Stack them up vertically
-    rotateZ: Math.random() * 360
-  }));
+  // Generate 100 donation boxes for a massive, professional rain effect
+  const donationBoxes = Array.from({ length: 100 }).map((_, i) => {
+    const yRand = Math.random();
+    // Position safely BEHIND the leaning giant block (whose top reaches ~452)
+    // Pile is highest near the domino (y=440) and tapers off towards the back (y=520)
+    const yPos = 440 + yRand * 80; 
+    const maxZ = (1 - yRand) * 150 + 20; 
+    
+    return {
+      id: i,
+      xOffset: (Math.random() - 0.5) * 160, // Wide spread horizontally
+      yOffset: yPos, 
+      delay: (Math.random() * 0.6), // Fast, chaotic drop
+      dropHeight: 800 + (Math.random() * 400), 
+      finalZ: Math.random() * maxZ, // Stack them up to form a wedge pile
+      rotZ: Math.random() * 360,
+      rotX: (Math.random() - 0.5) * 120, // Full 3D tumbling
+      rotY: (Math.random() - 0.5) * 120,
+    };
+  });
 
   return (
     <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[900px] flex flex-col justify-center">
@@ -152,7 +162,7 @@ export default function DominoEffect() {
                   </div>
                   <button 
                     onClick={handleDonate}
-                    className="btn-primary flex items-center gap-2 scale-110 shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]"
+                    className="btn-cta flex items-center gap-2 scale-110 shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]"
                   >
                     <Heart size={20} className="animate-bounce" />
                     Fazer Doação Urgente
@@ -220,16 +230,19 @@ export default function DominoEffect() {
                  animate={{
                    z: stage === 'saved' || stage === 'eureka' ? box.finalZ : box.dropHeight,
                    opacity: stage === 'saved' || stage === 'eureka' ? [0, 1, 1] : 0,
-                   rotateX: stage === 'saved' || stage === 'eureka' ? box.rotateZ : 0,
-                   rotateY: stage === 'saved' || stage === 'eureka' ? box.rotateZ : 0
+                   rotateX: stage === 'saved' || stage === 'eureka' ? box.rotX : 0,
+                   rotateY: stage === 'saved' || stage === 'eureka' ? box.rotY : 0,
+                   rotateZ: stage === 'saved' || stage === 'eureka' ? box.rotZ : 0
                  }}
                  transition={{
                    z: { type: 'spring', stiffness: 200, damping: 20, delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
                    opacity: { duration: 0.2, delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
-                   rotateX: { type: 'spring', delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 }
+                   rotateX: { type: 'spring', delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
+                   rotateY: { type: 'spring', delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
+                   rotateZ: { type: 'spring', delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 }
                  }}
                >
-                 <Block3D w={15} h={15} d={15} colors={donationColors} isDonation={true} />
+                 <Block3D w={16} h={16} d={16} colors={donationColors} isDonation={true} />
                </motion.div>
              ))}
 
