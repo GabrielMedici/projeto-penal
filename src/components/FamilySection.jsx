@@ -21,7 +21,7 @@ export default function FamilySection() {
   }, []);
 
   return (
-    <section id="fundamentacao" ref={sectionRef} className="py-24 bg-slate-50 relative">
+    <section className="py-24 bg-slate-50 relative">
       <div className="section-container px-6">
         
         {/* LEGAL FOUNDATION HEADER */}
@@ -54,7 +54,7 @@ export default function FamilySection() {
         </div>
 
         {/* FAMILY SECTION HEADER */}
-        <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
+        <div id="familia" className="text-center mb-16 animate-on-scroll animate-fade-in-up scroll-mt-24">
           <span className="inline-block text-navy-600 text-sm font-bold uppercase tracking-widest mb-3">
             Amparo Familiar
           </span>

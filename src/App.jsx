@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProblemSection from './components/ProblemSection';
+import DominoEffect from './components/DominoEffect';
 import CostSection from './components/CostSection';
 import FamilySection from './components/FamilySection';
 import TransparencySection from './components/TransparencySection';
@@ -13,6 +14,7 @@ export default function App() {
       <main>
         <HeroSection />
         <ProblemSection />
+        <DominoEffect />
         <CostSection />
         <FamilySection />
         <TransparencySection />
