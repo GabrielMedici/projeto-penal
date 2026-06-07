@@ -57,7 +57,7 @@ export default function HeroSection() {
             
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
               {/* White Backplate Shield - Reduzido drasticamente para caber apenas no gráfico da logo */}
-              <div className="absolute w-[45%] aspect-square bg-white rounded-full z-0 shadow-inner scale-125"></div>
+              <div className="absolute w-[42%] aspect-square bg-white rounded-full z-0 shadow-inner scale-125"></div>
               <img 
                 src="/images/logo_efeito_rebote.png" 
                 alt="Logo Efeito Rebote" 

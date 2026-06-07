@@ -12,7 +12,7 @@ export default function Footer() {
         
         {/* Logo */}
         <div className="mb-6 relative inline-flex justify-center items-center">
-          <div className="absolute w-[50%] h-[50%] bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] z-0"></div>
+          <div className="absolute w-[46%] h-[46%] bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] z-0"></div>
           <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-28 w-auto opacity-95 hover:opacity-100 transition-opacity relative z-10 scale-125" />
         </div>
 
