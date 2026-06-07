@@ -37,7 +37,7 @@ const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
 };
 
 export default function DominoEffect() {
-  const [stage, setStage] = useState('idle'); // 'idle', 'falling', 'eureka'
+  const [stage, setStage] = useState('idle'); // 'idle', 'falling_collapse', 'falling_saved', 'eureka'
 
   // Constant for automatic collapse loop
   useEffect(() => {
@@ -45,11 +45,11 @@ export default function DominoEffect() {
     if (stage === 'idle') {
       timer = setTimeout(() => {
         setStage('falling_collapse');
-      }, 2000);
+      }, 3000);
     } else if (stage === 'falling_collapse') {
       timer = setTimeout(() => {
         setStage('idle');
-      }, 4000);
+      }, 5000); // gives time to see the collapsed state before resetting
     }
     return () => clearTimeout(timer);
   }, [stage]);
@@ -85,23 +85,20 @@ export default function DominoEffect() {
   const donationBoxes = Array.from({ length: 25 }).map((_, i) => ({
     id: i,
     xOffset: (Math.random() - 0.5) * 120, // Spread horizontally IN FRONT OF giant
-    yOffset: 20 + (Math.random() * 60), // Y position in front of the giant block (which is at bottom: 40)
-    delay: 1.2 + (Math.random() * 0.5), // Rain starts dropping later as giant falls
+    yOffset: 10 + (Math.random() * 40), // Y position right in front of the giant block
+    delay: 0.8 + (Math.random() * 0.4), // Rain drops precisely as giant starts to tilt
     dropHeight: 400 + (Math.random() * 300), // Height from which it drops
     finalZ: (i % 5) * 15, // Stack them up vertically
     rotateZ: Math.random() * 360
   }));
 
-  // Block definitions (Arrayed from FARTHEST to CLOSEST)
-  // Index 0: Farthest (Smallest)
-  // Index 1: Medium
-  // Index 2: Large
-  // Index 3: Giant (Closest to Camera)
+  // Block definitions carefully measured so distance < height
+  // This guarantees physical collision and prevents clipping.
   const blocks = [
-    { id: 0, bottom: 350, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, fallAngle: -25, delay: 0 },
-    { id: 1, bottom: 250, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, fallAngle: -25, delay: 0.3 },
-    { id: 2, bottom: 140, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, fallAngle: -25, delay: 0.6 },
-    { id: 3, bottom: 20, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, fallAngle: 0 /* falls flat if collapse */, delay: 0.9 },
+    { id: 0, bottom: 230, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, collapseAngle: -25, savedAngle: -60 },
+    { id: 1, bottom: 180, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, collapseAngle: -15, savedAngle: -55 },
+    { id: 2, bottom: 110, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, collapseAngle: -5, savedAngle: -50 },
+    { id: 3, bottom: 20, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, collapseAngle: 0, savedAngle: -45 },
   ];
 
   return (
@@ -186,16 +183,10 @@ export default function DominoEffect() {
              {blocks.map((block) => {
                // Determine target rotation based on state
                let targetRotateX = -90; // Standing up
-               if (stage === 'falling_collapse' || stage === 'falling_saved' || stage === 'eureka') {
-                 if (block.isGiant) {
-                    if (stage === 'falling_saved' || stage === 'eureka') {
-                       targetRotateX = -65; // Caught by the donations!
-                    } else {
-                       targetRotateX = 0; // Collapses flat on the ground!
-                    }
-                 } else {
-                    targetRotateX = block.fallAngle; // Falls onto the next block
-                 }
+               if (stage === 'falling_collapse') {
+                 targetRotateX = block.collapseAngle;
+               } else if (stage === 'falling_saved' || stage === 'eureka') {
+                 targetRotateX = block.savedAngle;
                }
 
                return (
@@ -214,8 +205,8 @@ export default function DominoEffect() {
                    }}
                    transition={{
                      type: 'spring', 
-                     stiffness: block.isGiant ? 80 : 150, 
-                     damping: block.isGiant ? 12 : 15, 
+                     stiffness: block.isGiant ? 100 : 180, 
+                     damping: block.isGiant ? 15 : 18, 
                      delay: stage === 'idle' ? 0 : block.delay 
                    }}
                  >
