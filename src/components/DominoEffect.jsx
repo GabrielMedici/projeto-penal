@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingDown, RotateCcw, Heart } from 'lucide-react';
+import { TrendingDown, RotateCcw, Heart, Play } from 'lucide-react';
 
 const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
   return (
@@ -37,28 +37,30 @@ const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
 };
 
 export default function DominoEffect() {
-  const [stage, setStage] = useState('idle'); // 'idle', 'falling_collapse', 'falling_saved', 'eureka'
+  // 'idle', 'cascade', 'frozen', 'saved', 'eureka'
+  const [stage, setStage] = useState('idle'); 
 
-  // Constant for automatic collapse loop
+  // Auto-start cascade if the user scrolls to it
   useEffect(() => {
     let timer;
     if (stage === 'idle') {
       timer = setTimeout(() => {
-        setStage('falling_collapse');
-      }, 3000);
-    } else if (stage === 'falling_collapse') {
+        setStage('cascade');
+      }, 1000);
+    } else if (stage === 'cascade') {
+      // Freeze right before the giant falls completely
       timer = setTimeout(() => {
-        setStage('idle');
-      }, 5000); // gives time to see the collapsed state before resetting
+        setStage('frozen');
+      }, 1500); 
     }
     return () => clearTimeout(timer);
   }, [stage]);
 
   const handleDonate = () => {
-    setStage('falling_saved');
+    setStage('saved');
     setTimeout(() => {
       setStage('eureka');
-    }, 2500); // Sequence completes after 2.5s
+    }, 2000); // Sequence completes after 2s
   };
 
   const handleReset = () => {
@@ -81,28 +83,29 @@ export default function DominoEffect() {
     border: 'border-amber-300/30'
   };
 
+  // Block definitions carefully measured so distance < height
+  // They are arrayed from FRONT (closest to camera) to BACK (farthest).
+  // Falling BACKWARDS means rotateX goes from -90 towards -180.
+  const blocks = [
+    { id: 0, bottom: 20, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, cascadeAngle: -160, savedAngle: -165 },
+    { id: 1, bottom: 70, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, cascadeAngle: -150, savedAngle: -155 },
+    { id: 2, bottom: 150, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, cascadeAngle: -120, savedAngle: -145 },
+    { id: 3, bottom: 270, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, cascadeAngle: -100, savedAngle: -135 },
+  ];
+
   // Generate 25 donation boxes for the rain effect
   const donationBoxes = Array.from({ length: 25 }).map((_, i) => ({
     id: i,
-    xOffset: (Math.random() - 0.5) * 120, // Spread horizontally IN FRONT OF giant
-    yOffset: 10 + (Math.random() * 40), // Y position right in front of the giant block
-    delay: 0.8 + (Math.random() * 0.4), // Rain drops precisely as giant starts to tilt
+    xOffset: (Math.random() - 0.5) * 120, // Spread horizontally BEHIND giant
+    yOffset: 280 + (Math.random() * 40), // Y position BEHIND the giant block
+    delay: (Math.random() * 0.4), // Rain drops fast when clicked
     dropHeight: 400 + (Math.random() * 300), // Height from which it drops
     finalZ: (i % 5) * 15, // Stack them up vertically
     rotateZ: Math.random() * 360
   }));
 
-  // Block definitions carefully measured so distance < height
-  // This guarantees physical collision and prevents clipping.
-  const blocks = [
-    { id: 0, bottom: 230, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, collapseAngle: -25, savedAngle: -60 },
-    { id: 1, bottom: 180, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, collapseAngle: -15, savedAngle: -55 },
-    { id: 2, bottom: 110, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, collapseAngle: -5, savedAngle: -50 },
-    { id: 3, bottom: 20, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, collapseAngle: 0, savedAngle: -45 },
-  ];
-
   return (
-    <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10">
+    <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[800px] flex flex-col justify-center">
       
       {/* Background ambient light */}
       <motion.div 
@@ -112,35 +115,61 @@ export default function DominoEffect() {
         transition={{ duration: 2 }}
       />
 
-      <div className="section-container px-6 relative z-10 flex flex-col items-center">
+      <div className="section-container px-6 relative z-10 flex flex-col items-center flex-1 w-full max-w-6xl mx-auto">
         
-        <div className="text-center mb-10 animate-fade-in-up">
+        <div className="text-center mb-8 animate-fade-in-up w-full max-w-2xl">
           <span className="inline-block text-gold-accent text-sm font-bold uppercase tracking-widest mb-3 glow-amber-text">
-            Física da Prevenção
+            Cinemática da Prevenção
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">
             O Efeito Dominó
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto font-medium text-lg mb-8">
-            Os problemas começam pequenos no fundo e crescem até colapsar o sistema na ponta. 
-            Clique em "Fazer Doação" para intervir antes que seja tarde.
+          <p className="text-slate-400 font-medium text-lg mb-0">
+            A falta de pequenos itens gera um colapso gigante. Veja a reação em cadeia e aja no momento crítico.
           </p>
-          
-          <button 
-            onClick={handleDonate}
-            className="btn-primary flex items-center gap-2 mx-auto scale-110"
-          >
-            <Heart size={20} />
-            Fazer Doação
-          </button>
         </div>
 
-        {/* 3D Scene */}
-        <div className="relative w-full max-w-4xl h-[450px] md:h-[600px] flex items-center justify-center perspective-[1500px] animate-fade-in-up delay-200">
+        {/* 3D Scene AND Sidebar Layout */}
+        <div className="relative w-full flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 flex-1">
           
+          {/* Action Center - Left on Desktop, Top on Mobile */}
+          <div className="flex flex-col items-center justify-center min-h-[120px] w-full max-w-sm z-30">
+            <AnimatePresence mode="wait">
+              {stage === 'frozen' ? (
+                <motion.div 
+                  key="donate-btn"
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="flex flex-col items-center"
+                >
+                  <p className="text-amber-500 font-bold mb-4 animate-pulse uppercase tracking-widest text-sm glow-amber-text">O sistema vai colapsar!</p>
+                  <button 
+                    onClick={handleDonate}
+                    className="btn-primary flex items-center gap-2 scale-110 shadow-[0_0_40px_rgba(212,175,55,0.5)] hover:shadow-[0_0_60px_rgba(212,175,55,0.8)]"
+                  >
+                    <Heart size={20} className="animate-bounce" />
+                    Fazer Doação Urgente
+                  </button>
+                </motion.div>
+              ) : stage === 'idle' || stage === 'cascade' ? (
+                <motion.div 
+                  key="observing"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-slate-500 font-bold uppercase tracking-widest text-sm flex items-center gap-2"
+                >
+                  <Play size={16} className="animate-pulse text-amber-500" />
+                  Observando Cadeia...
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+
           {/* Isometric Tabletop Container */}
           <motion.div 
-            className="relative w-[300px] h-[500px]"
+            className="relative w-[300px] h-[550px] shrink-0"
             style={{ transformStyle: 'preserve-3d' }}
             initial={{ rotateX: 65, rotateZ: -45 }}
             animate={{ rotateX: 65, rotateZ: -45 }}
@@ -150,7 +179,7 @@ export default function DominoEffect() {
                <div className="w-full h-full opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
              </div>
 
-             {/* Rain of Donations (rendered in front of the giant domino to hold it) */}
+             {/* Rain of Donations (rendered BEHIND the giant domino to prop it up) */}
              {donationBoxes.map((box) => (
                <motion.div
                  key={`donation-${box.id}`}
@@ -164,28 +193,28 @@ export default function DominoEffect() {
                  }}
                  initial={{ z: box.dropHeight, opacity: 0, rotateX: 0, rotateY: 0 }}
                  animate={{
-                   z: stage === 'falling_saved' || stage === 'eureka' ? box.finalZ : box.dropHeight,
-                   opacity: stage === 'falling_saved' || stage === 'eureka' ? [0, 1, 1] : 0,
-                   rotateX: stage === 'falling_saved' || stage === 'eureka' ? box.rotateZ : 0,
-                   rotateY: stage === 'falling_saved' || stage === 'eureka' ? box.rotateZ : 0
+                   z: stage === 'saved' || stage === 'eureka' ? box.finalZ : box.dropHeight,
+                   opacity: stage === 'saved' || stage === 'eureka' ? [0, 1, 1] : 0,
+                   rotateX: stage === 'saved' || stage === 'eureka' ? box.rotateZ : 0,
+                   rotateY: stage === 'saved' || stage === 'eureka' ? box.rotateZ : 0
                  }}
                  transition={{
-                   z: { type: 'spring', stiffness: 200, damping: 20, delay: stage === 'falling_saved' || stage === 'eureka' ? box.delay : 0 },
-                   opacity: { duration: 0.2, delay: stage === 'falling_saved' || stage === 'eureka' ? box.delay : 0 },
-                   rotateX: { type: 'spring', delay: stage === 'falling_saved' || stage === 'eureka' ? box.delay : 0 }
+                   z: { type: 'spring', stiffness: 200, damping: 20, delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
+                   opacity: { duration: 0.2, delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 },
+                   rotateX: { type: 'spring', delay: stage === 'saved' || stage === 'eureka' ? box.delay : 0 }
                  }}
                >
                  <Block3D w={15} h={15} d={15} colors={donationColors} isDonation={true} />
                </motion.div>
              ))}
 
-             {/* Obsidian Dominos (The Chain Reaction falling FORWARDS) */}
+             {/* Obsidian Dominos (The Chain Reaction falling BACKWARDS) */}
              {blocks.map((block) => {
-               // Determine target rotation based on state
+               // Determine target rotation based on cinematic state
                let targetRotateX = -90; // Standing up
-               if (stage === 'falling_collapse') {
-                 targetRotateX = block.collapseAngle;
-               } else if (stage === 'falling_saved' || stage === 'eureka') {
+               if (stage === 'cascade' || stage === 'frozen') {
+                 targetRotateX = block.cascadeAngle; 
+               } else if (stage === 'saved' || stage === 'eureka') {
                  targetRotateX = block.savedAngle;
                }
 
@@ -205,16 +234,17 @@ export default function DominoEffect() {
                    }}
                    transition={{
                      type: 'spring', 
-                     stiffness: block.isGiant ? 100 : 180, 
-                     damping: block.isGiant ? 15 : 18, 
-                     delay: stage === 'idle' ? 0 : block.delay 
+                     stiffness: block.isGiant ? 80 : 150, 
+                     damping: block.isGiant ? 12 : 15, 
+                     // Only apply delay during the initial cascade, otherwise respond instantly
+                     delay: stage === 'cascade' ? block.delay : 0 
                    }}
                  >
                    {/* Realistic Cast Shadow */}
                    <motion.div 
                      className="absolute bottom-0 left-0 w-full bg-black/70 origin-bottom blur-lg" 
                      style={{ height: block.h * 1.5, transform: 'rotateX(90deg) translateZ(-2px)' }} 
-                     animate={{ opacity: stage === 'idle' ? 0.6 : (targetRotateX === 0 ? 0 : 0.4) }}
+                     animate={{ opacity: stage === 'idle' ? 0.6 : (targetRotateX === -180 ? 0 : 0.4) }}
                    />
                    
                    <Block3D w={block.w} h={block.h} d={block.d} colors={obsidianColors} isGiant={block.isGiant} label={block.label} />
@@ -223,37 +253,38 @@ export default function DominoEffect() {
              })}
           </motion.div>
 
-          {/* Eureka Modal */}
-          <AnimatePresence>
-            {stage === 'eureka' && (
-              <motion.div 
-                className="absolute inset-0 flex items-center justify-center z-40 px-6 pointer-events-none"
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ type: 'spring', damping: 20, stiffness: 100, delay: 0.2 }}
-              >
-                <div className="obsidian-card p-8 md:p-12 max-w-lg w-full text-center border-amber-500/30 relative overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.9)] pointer-events-auto mt-20">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-400" />
-                  <div className="w-16 h-16 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
-                    <TrendingDown size={32} className="text-gold-accent" />
-                  </div>
-                  <h3 className="text-3xl font-black text-amber-500 mb-4 glow-amber-text">Efeito Paralisado</h3>
-                  <p className="text-slate-300 text-lg leading-relaxed mb-8 font-medium">
-                    A doação direta formou um alicerce físico. Em vez do colapso massivo, o sistema é escorado pela solidariedade, anulando gastos exorbitantes em saúde prisional.
-                  </p>
-                  <button 
-                    onClick={handleReset}
-                    className="text-sm font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors flex items-center justify-center gap-2 mx-auto"
-                  >
-                    <RotateCcw size={16} />
-                    Resetar Simulação
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
         </div>
+
+        {/* Eureka Modal */}
+        <AnimatePresence>
+          {stage === 'eureka' && (
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center z-40 px-6 pointer-events-none bg-slate-950/60 backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 100, delay: 0.2 }}
+            >
+              <div className="obsidian-card p-8 md:p-12 max-w-lg w-full text-center border-amber-500/30 relative overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.9)] pointer-events-auto">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-400" />
+                <div className="w-16 h-16 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+                  <TrendingDown size={32} className="text-gold-accent" />
+                </div>
+                <h3 className="text-3xl font-black text-amber-500 mb-4 glow-amber-text">Colapso Evitado</h3>
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 font-medium">
+                  Sua doação criou um muro de contenção físico. Em vez do desastre financeiro e humano, o sistema foi escorado pela solidariedade civil na hora exata.
+                </p>
+                <button 
+                  onClick={handleReset}
+                  className="text-sm font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors flex items-center justify-center gap-2 mx-auto"
+                >
+                  <RotateCcw size={16} />
+                  Resetar Cena
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </section>
   );
