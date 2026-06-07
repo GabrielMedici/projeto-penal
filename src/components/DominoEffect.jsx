@@ -89,12 +89,12 @@ export default function DominoEffect() {
   // Block definitions carefully measured to fall FORWARDS (towards the background)
   // Wider stagger (0.2s) with gravity tween for a fluid, continuous wave
   const blocks = [
-    { id: 0, bottom: 20, w: 25, h: 50, d: 8, label: "Sem Kits", isGiant: false, delay: 0, cascadeAngle: -70, savedAngle: -50, collapseAngle: -15 },
-    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.2, cascadeAngle: -73, savedAngle: -53, collapseAngle: -12 },
-    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.4, cascadeAngle: -76, savedAngle: -56, collapseAngle: -9 },
-    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.6, cascadeAngle: -79, savedAngle: -59, collapseAngle: -6 },
-    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.8, cascadeAngle: -82, savedAngle: -62, collapseAngle: -3 },
-    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 1.0, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
+    { id: 0, bottom: 20, w: 25, h: 50, d: 8, label: "Sem Kits", isGiant: false, delay: 0, cascadeAngle: -15, savedAngle: -20, collapseAngle: 0 },
+    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.2, cascadeAngle: -25, savedAngle: -30, collapseAngle: -2 },
+    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.4, cascadeAngle: -35, savedAngle: -40, collapseAngle: -4 },
+    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.6, cascadeAngle: -45, savedAngle: -50, collapseAngle: -6 },
+    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.8, cascadeAngle: -55, savedAngle: -60, collapseAngle: -8 },
+    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 1.0, cascadeAngle: -65, savedAngle: -70, collapseAngle: -10 },
   ];
 
   // Generate 100 donation boxes for a massive, professional rain effect
