@@ -202,13 +202,15 @@ export default function DominoEffect() {
             </AnimatePresence>
           </div>
 
-          {/* Isometric Tabletop Container */}
-          <motion.div 
-            className="relative w-[300px] h-[650px] shrink-0 mt-8 lg:mt-0"
-            style={{ transformStyle: 'preserve-3d' }}
-            initial={{ rotateX: 65, rotateZ: -45, scale: 0.95 }}
-            animate={{ rotateX: 65, rotateZ: -45, scale: 0.95 }}
-          >
+          {/* Isometric Tabletop Wrapper for Mobile Scaling */}
+          <div className="w-full flex justify-center items-center h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden lg:overflow-visible">
+            <div className="scale-[0.6] sm:scale-[0.75] md:scale-90 lg:scale-100 origin-center transition-transform duration-500">
+              <motion.div 
+                className="relative w-[300px] h-[650px] shrink-0"
+                style={{ transformStyle: 'preserve-3d' }}
+                initial={{ rotateX: 65, rotateZ: -45 }}
+                animate={{ rotateX: 65, rotateZ: -45 }}
+              >
              {/* Glowing Scene Floor */}
              <div className="absolute inset-0 border border-white/5 bg-slate-900/40 rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.8)_inset]" style={{ transform: 'translateZ(-1px)' }}>
                <div className="w-full h-full opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
@@ -292,6 +294,8 @@ export default function DominoEffect() {
                );
              })}
           </motion.div>
+            </div>
+          </div>
 
         </div>
 
