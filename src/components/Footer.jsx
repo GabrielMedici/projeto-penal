@@ -1,4 +1,4 @@
-import { Code, FileText, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 export default function Footer() {
   const scrollToTop = (e) => {
@@ -34,19 +34,10 @@ export default function Footer() {
         </div>
 
         {/* Links & Copyright */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-4">
+        <div className="w-full flex flex-col md:flex-row justify-center items-center pt-8 border-t border-white/10 gap-4">
           <p className="text-xs">
             © {new Date().getFullYear()} Projeto Efeito Rebote. Todos os direitos reservados.
           </p>
-          
-          <div className="flex gap-4">
-            <a href="#" className="text-slate-400 hover:text-gold-accent transition-colors flex items-center gap-1 text-sm">
-              <FileText size={16} /> Relatório
-            </a>
-            <a href="https://github.com/GabrielMedici/projeto-penal" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-gold-accent transition-colors flex items-center gap-1 text-sm">
-              <Code size={16} /> Código-Fonte
-            </a>
-          </div>
         </div>
 
         <button 
