@@ -88,17 +88,19 @@ export default function DominoEffect() {
   // Block definitions carefully measured to fall FORWARDS (towards the background)
   // Front block falls, top moves from standing (-90) towards flat on floor (0).
   const blocks = [
-    { id: 0, bottom: 20, w: 30, h: 70, d: 12, label: "Falta de Kits", isGiant: false, delay: 0, cascadeAngle: -70, savedAngle: -50, collapseAngle: -15 },
-    { id: 1, bottom: 70, w: 45, h: 100, d: 16, label: "Doenças", isGiant: false, delay: 0.2, cascadeAngle: -75, savedAngle: -55, collapseAngle: -10 },
-    { id: 2, bottom: 150, w: 60, h: 150, d: 20, label: "Escoltas", isGiant: false, delay: 0.4, cascadeAngle: -80, savedAngle: -60, collapseAngle: -5 },
-    { id: 3, bottom: 270, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
+    { id: 0, bottom: 20, w: 25, h: 50, d: 8, label: "Sem Kits", isGiant: false, delay: 0, cascadeAngle: -70, savedAngle: -50, collapseAngle: -15 },
+    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.15, cascadeAngle: -73, savedAngle: -53, collapseAngle: -12 },
+    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.3, cascadeAngle: -76, savedAngle: -56, collapseAngle: -9 },
+    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.45, cascadeAngle: -79, savedAngle: -59, collapseAngle: -6 },
+    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.6, cascadeAngle: -82, savedAngle: -62, collapseAngle: -3 },
+    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.75, cascadeAngle: -85, savedAngle: -65, collapseAngle: 0 },
   ];
 
   // Generate 25 donation boxes for the rain effect
   const donationBoxes = Array.from({ length: 25 }).map((_, i) => ({
     id: i,
     xOffset: (Math.random() - 0.5) * 120, // Spread horizontally BEHIND giant
-    yOffset: 290 + (Math.random() * 40), // Y position BEHIND the giant block
+    yOffset: 380 + (Math.random() * 40), // Y position BEHIND the giant block
     delay: (Math.random() * 0.4), // Rain drops fast when clicked
     dropHeight: 400 + (Math.random() * 300), // Height from which it drops
     finalZ: (i % 5) * 15, // Stack them up vertically
@@ -106,7 +108,7 @@ export default function DominoEffect() {
   }));
 
   return (
-    <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[800px] flex flex-col justify-center">
+    <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[900px] flex flex-col justify-center">
       
       {/* Background ambient light */}
       <motion.div 
@@ -116,9 +118,9 @@ export default function DominoEffect() {
         transition={{ duration: 2 }}
       />
 
-      <div className="section-container px-6 relative z-10 flex flex-col items-center flex-1 w-full max-w-6xl mx-auto">
+      <div className="section-container px-6 relative z-10 flex flex-col items-center flex-1 w-full max-w-7xl mx-auto">
         
-        <div className="text-center mb-8 animate-fade-in-up w-full max-w-2xl">
+        <div className="text-center mb-4 animate-fade-in-up w-full max-w-2xl">
           <span className="inline-block text-gold-accent text-sm font-bold uppercase tracking-widest mb-3 glow-amber-text">
             Cinemática da Prevenção
           </span>
@@ -131,7 +133,7 @@ export default function DominoEffect() {
         </div>
 
         {/* 3D Scene AND Sidebar Layout */}
-        <div className="relative w-full flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 flex-1">
+        <div className="relative w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 flex-1">
           
           {/* Action Center - Left on Desktop, Top on Mobile */}
           <div className="flex flex-col items-center justify-center min-h-[120px] w-full max-w-sm z-30">
@@ -192,10 +194,10 @@ export default function DominoEffect() {
 
           {/* Isometric Tabletop Container */}
           <motion.div 
-            className="relative w-[300px] h-[550px] shrink-0"
+            className="relative w-[300px] h-[650px] shrink-0 mt-8 lg:mt-0"
             style={{ transformStyle: 'preserve-3d' }}
-            initial={{ rotateX: 65, rotateZ: -45 }}
-            animate={{ rotateX: 65, rotateZ: -45 }}
+            initial={{ rotateX: 65, rotateZ: -45, scale: 0.95 }}
+            animate={{ rotateX: 65, rotateZ: -45, scale: 0.95 }}
           >
              {/* Glowing Scene Floor */}
              <div className="absolute inset-0 border border-white/5 bg-slate-900/40 rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.8)_inset]" style={{ transform: 'translateZ(-1px)' }}>
