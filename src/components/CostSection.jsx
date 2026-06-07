@@ -96,128 +96,82 @@ export default function CostSection() {
   }, []);
 
   return (
-    <section
-      id="custos"
-      ref={sectionRef}
-      className="section-padding"
-    >
-      <div className="section-container">
+    <section id="custos" className="py-24 bg-slate-50 relative overflow-hidden" ref={sectionRef}>
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gold-accent/5 -skew-x-12 transform origin-top-right"></div>
+
+      <div className="section-container relative z-10">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-gold-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Dados & Evidências
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-            A Matemática da Prevenção
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
+            A Matemática da <span className="text-gold-accent">Prevenção</span>
           </h2>
-          <p className="text-slate-300 max-w-2xl mx-auto text-lg">
-            Comparativo entre o custo da intervenção preventiva e o custo de
-            agir apenas na crise no sistema de saúde pública.
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
+            Comparativo financeiro entre prover a assistência material mínima 
+            (higiene e saúde preventiva) e o custo de lidar com as crises geradas 
+            pela omissão.
           </p>
         </div>
 
-        {/* Counters */}
-        <div className="animate-on-scroll animate-fade-in-up delay-200 grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-            <div className="counter-value">R$ 30–45</div>
-            <p className="text-slate-300 text-sm mt-2">Custo preventivo mensal<br />por interno</p>
-            <p className="text-slate-300/50 text-xs mt-2 italic">Levantamento de mercado — Maringá/PR, 2024</p>
-          </div>
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-            <AnimatedCounter target={5000} prefix="R$ " suffix="+" />
-            <p className="text-slate-300 text-sm mt-2">Custo de agir na crise<br />(SUS + escoltas)</p>
-            <p className="text-slate-300/50 text-xs mt-2 italic">DEPEN/INFOPEN 2023 + MS/DataSUS</p>
-          </div>
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-            <div className="counter-value">~110–166x</div>
-            <p className="text-slate-300 text-sm mt-2">Mais eficiente que<br />agir apenas na crise</p>
-            <p className="text-slate-300/50 text-xs mt-2 italic">Razão: R$ 5.000 ÷ R$ 30–45</p>
-          </div>
-        </div>
-
-        {/* Sources note */}
-        <div className="animate-on-scroll animate-fade-in-up delay-300 text-center mb-16">
-          <p className="text-xs text-slate-300/40 max-w-2xl mx-auto leading-relaxed">
-            Fontes: Levantamento Nacional de Informações Penitenciárias (INFOPEN/DEPEN, 2023); 
-            Relatório Justiça em Números (CNJ/DMF, 2022); Sistema de Informações Hospitalares 
-            do SUS (SIH/DataSUS, 2022); Pesquisa de preços no comércio local de Maringá/PR (2024).
-          </p>
-        </div>
-
-        {/* Layout: Image centered above, Table full width below */}
-        <div className="flex flex-col gap-12 items-center mt-12">
-          {/* Image */}
-          <div className="w-full max-w-3xl animate-on-scroll animate-slide-in-up delay-200">
-            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              <img
-                src="/images/chart_cost_healthcare.png"
-                alt="Gráfico demonstrando o crescimento exponencial dos custos de agir apenas na crise em saúde pública"
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
+        {/* Infographic Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
+          
+          {/* Left Card: Prevention */}
+          <div className="bg-white border-t-4 border-navy-800 rounded-2xl p-8 shadow-lg flex flex-col justify-between relative overflow-hidden animate-on-scroll animate-fade-in-up">
+            <div className="absolute top-0 right-0 p-4 opacity-5">
+              <TrendingDown size={100} className="text-navy-900" />
             </div>
-            <p className="text-xs text-slate-300 mt-3 text-center italic">
-              Representação conceitual do crescimento exponencial dos custos de agir apenas na crise no sistema prisional.
-            </p>
-          </div>
-
-          {/* Comparison Table */}
-          <div className="w-full animate-on-scroll animate-slide-in-up delay-300">
             <div>
-              <table className="comparison-table w-full">
-              <thead>
-                <tr>
-                  <th>Indicador</th>
-                  <th>
-                    <span className="flex items-center gap-2">
-                      <CheckCircle size={14} className="text-gold-accent" />
-                      Prevenção
-                    </span>
-                  </th>
-                  <th>
-                    <span className="flex items-center gap-2">
-                      <AlertTriangle size={14} className="text-amber-300" />
-                      Agir na crise
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((row) => (
-                  <tr key={row.indicator}>
-                    <td data-label="Indicador">
-                      <span className="font-medium text-white block">{row.indicator}</span>
-                      {row.source && (
-                        <span className="text-xs text-slate-300/60 italic block mt-1">{row.source}</span>
-                      )}
-                    </td>
-                    <td data-label="Prevenção">
-                      <span className="inline-flex items-center gap-1 text-gold-accent">
-                        <TrendingDown size={14} />
-                        {row.prevention}
-                      </span>
-                    </td>
-                    <td data-label="Agir na crise">
-                      <span className="inline-flex items-center gap-1 text-amber-400">
-                        <TrendingUp size={14} />
-                        {row.reactive}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-              </table>
+              <h3 className="text-lg font-semibold text-navy-800 mb-2 uppercase tracking-wide">Custo Preventivo</h3>
+              <p className="text-sm text-slate-500 mb-6">Kit de higiene mensal + medicamentos primários</p>
             </div>
+            <div>
+              <div className="text-4xl lg:text-5xl font-extrabold text-navy-900 mb-2">
+                <span className="text-2xl opacity-70 align-top mr-1">R$</span>
+                30 a 45
+              </div>
+              <p className="text-sm font-semibold text-gold-accent">Por interno / mês</p>
+            </div>
+          </div>
 
-            <div className="mt-6 p-4 rounded-xl bg-gold-accent/10 border border-gold-accent/20">
-              <p className="text-sm text-gold-accent leading-relaxed">
-                <strong>Conclusão:</strong> Cada R$ 1,00 investido em prevenção evita entre
-                R$ 110,00 e R$ 166,00 em custos emergenciais de saúde, escoltas e internações do SUS.
-              </p>
-              <p className="text-xs text-gold-accent/80 mt-2 italic">
-                Cálculo projetado: custo médio de agir apenas na crise (DEPEN/INFOPEN 2023 + MS/DataSUS 2022) ÷ custo preventivo (pesquisa de mercado local, 2024).
-              </p>
+          {/* Center Card: Efficiency */}
+          <div className="bg-navy-900 rounded-2xl p-8 shadow-xl flex flex-col justify-center items-center text-center transform scale-105 z-10 animate-on-scroll animate-fade-in-up delay-100">
+            <h3 className="text-white/80 font-medium uppercase tracking-widest text-sm mb-4">Eficiência Comprovada</h3>
+            <div className="text-5xl lg:text-6xl font-extrabold text-gold-accent mb-4">
+              ~166<span className="text-4xl">x</span>
             </div>
+            <p className="text-white text-lg font-semibold mb-2">Mais eficiente</p>
+            <p className="text-white/60 text-sm">Do que o custo de contenção em saúde pública e escoltas</p>
+          </div>
+
+          {/* Right Card: Crisis */}
+          <div className="bg-white border-t-4 border-burgundy-cta rounded-2xl p-8 shadow-lg flex flex-col justify-between relative overflow-hidden animate-on-scroll animate-fade-in-up delay-200">
+            <div className="absolute top-0 right-0 p-4 opacity-5">
+              <TrendingUp size={100} className="text-burgundy-cta" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-burgundy-cta mb-2 uppercase tracking-wide">Agir na Crise</h3>
+              <p className="text-sm text-slate-500 mb-6">Internação SUS, escolta, surtos de tuberculose/sarna</p>
+            </div>
+            <div>
+              <div className="text-4xl lg:text-5xl font-extrabold text-burgundy-cta mb-2">
+                <span className="text-2xl opacity-70 align-top mr-1">R$</span>
+                5.000<span className="text-3xl">+</span>
+              </div>
+              <p className="text-sm font-semibold text-burgundy-cta/80">Por evento de crise</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Table replacement - Data Detail below infographic */}
+        <div className="mt-12 animate-on-scroll animate-fade-in-up delay-300">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <p className="text-sm text-slate-600 leading-relaxed text-center italic">
+              <strong>Metodologia de Cálculo:</strong> Projeção baseada no custo médio de reagir apenas na crise (DEPEN/INFOPEN 2023 + MS/DataSUS 2022) dividido pelo custo preventivo local mensurado pelo projeto (pesquisa de mercado, 2024).
+            </p>
           </div>
         </div>
       </div>

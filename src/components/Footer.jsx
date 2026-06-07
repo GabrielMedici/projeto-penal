@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="section-padding pb-8"
+      className="section-padding pb-8 bg-navy-900"
     >
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">

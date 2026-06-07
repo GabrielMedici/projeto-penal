@@ -69,22 +69,17 @@ export default function TransparencySection() {
   }, []);
 
   return (
-    <section
-      id="transparencia"
-      ref={sectionRef}
-      className="section-padding backdrop-blur-md"
-      style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}
-    >
+    <section id="transparencia" ref={sectionRef} className="py-24 bg-navy-900 relative">
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-gold-accent text-sm font-semibold uppercase tracking-widest mb-3">
             Metodologia
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
             Transparência em cada etapa
           </h2>
-          <p className="max-w-2xl mx-auto text-lg" style={{ color: '#64748B' }}>
+          <p className="max-w-2xl mx-auto text-lg text-slate-300">
             Cada fase da intervenção é documentada e auditável, garantindo a
             rastreabilidade completa dos recursos aplicados.
           </p>
@@ -93,11 +88,11 @@ export default function TransparencySection() {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {/* Connector line (desktop only) */}
-          <div className="hidden md:block absolute top-24 left-[16.67%] right-[16.67%] h-[2px]">
+          <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-[2px]">
             <div
               className="w-full h-full"
               style={{
-                background: 'linear-gradient(90deg, #009C3B, #D4A843, #009C3B)',
+                background: 'linear-gradient(90deg, transparent, #D4A843, transparent)',
                 opacity: 0.3,
               }}
             />
@@ -107,31 +102,26 @@ export default function TransparencySection() {
             const Icon = step.icon;
             return (
               <div
-                key={step.number}
-                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 200} card-elevated relative`}
+                key={step.title}
+                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 200} bg-navy-800 rounded-2xl p-8 border border-white/5 shadow-xl relative z-10`}
               >
-                {/* Step number badge */}
-                <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-navy-800 border-2 border-gold-accent text-gold-accent text-xs font-bold flex items-center justify-center shadow-lg">
-                  {step.number}
-                </div>
-
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-navy-900 flex items-center justify-center mb-5 mt-2">
-                  <Icon size={26} className="text-white" />
+                {/* Icon in place of number */}
+                <div className="w-16 h-16 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mx-auto mb-6">
+                  <Icon size={32} className="text-gold-accent" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-navy-900 mb-1">{step.title}</h3>
-                <p className="text-sm font-medium text-gold-accent mb-3">{step.subtitle}</p>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: '#64748B' }}>
+                <h3 className="text-xl font-bold text-white mb-1 text-center">{step.title}</h3>
+                <p className="text-sm font-medium text-gold-accent mb-4 text-center">{step.subtitle}</p>
+                <p className="text-sm leading-relaxed mb-6 text-slate-300 text-center">
                   {step.description}
                 </p>
 
                 {/* Details list */}
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {step.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-2 text-sm" style={{ color: '#475569' }}>
-                      <CheckCircle size={14} className="text-gold-accent mt-0.5 flex-shrink-0" />
+                    <li key={detail} className="flex items-start gap-3 text-sm text-slate-400">
+                      <CheckCircle size={16} className="text-gold-accent flex-shrink-0 mt-0.5" />
                       <span>{detail}</span>
                     </li>
                   ))}

@@ -41,12 +41,7 @@ export default function ProblemSection() {
   }, []);
 
   return (
-    <section
-      id="problema"
-      ref={sectionRef}
-      className="section-padding backdrop-blur-md"
-      style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}
-    >
+    <section id="problema" ref={sectionRef} className="py-24 bg-white relative">
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
@@ -58,58 +53,56 @@ export default function ProblemSection() {
             <br />
             <span className="text-navy-700">e o seu custo sistêmico</span>
           </h2>
-          <p className="text-slate-300 max-w-2xl mx-auto text-lg" style={{ color: '#64748B' }}>
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
             A análise dos dados revela um ciclo previsível: a falha na assistência material básica gera gastos muito maiores para o bolso do cidadão.
           </p>
         </div>
 
-        {/* Grid: Points + Quote */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          {/* Key Points - 3 columns */}
-          <div className="lg:col-span-3 space-y-6">
-            {keyPoints.map((point, i) => {
-              const Icon = point.icon;
-              return (
-                <div
-                  key={point.title}
-                  className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} card-elevated flex gap-5 items-start`}
-                >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-burgundy-cta/10 flex items-center justify-center">
-                    <Icon size={22} className="text-burgundy-cta" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-navy-900 mb-2">{point.title}</h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>
-                      {point.text}
-                    </p>
-                  </div>
+        {/* Grid: Points */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          {keyPoints.map((point, i) => {
+            const Icon = point.icon;
+            return (
+              <div
+                key={point.title}
+                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} bg-slate-50 p-8 rounded-2xl flex flex-col gap-5`}
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-burgundy-cta/10 flex items-center justify-center">
+                  <Icon size={22} className="text-burgundy-cta" />
                 </div>
-              );
-            })}
-          </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-navy-900 mb-2">{point.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {point.text}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Quote - 2 columns */}
-          <div className="lg:col-span-2 animate-on-scroll animate-slide-in-right delay-300">
-            <div className="quote-block mb-6">
-              <p className="text-base leading-relaxed mb-4">
-                "A assistência material ao preso e ao internado consistirá no fornecimento
-                de alimentação, vestuário e <strong>instalações higiênicas</strong>."
+        {/* Legal Foundation */}
+        <div className="animate-on-scroll animate-fade-in-up delay-400">
+          <h3 className="text-2xl font-bold text-navy-900 mb-6 flex items-center justify-center gap-3">
+            <Scale className="text-burgundy-cta" size={28} />
+            Fundamentação Legal (LEP)
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-6 border-l-4 border-burgundy-cta bg-slate-50 rounded-r-xl">
+              <p className="font-semibold text-navy-900 mb-2">Artigo 12</p>
+              <p className="text-sm text-slate-600">
+                "A assistência material ao preso e ao internado consistirá no fornecimento de alimentação, 
+                <strong> vestuário e instalações higiênicas</strong>."
               </p>
-              <footer className="text-sm font-semibold text-navy-700 not-italic">
-                — Lei nº 7.210/84 (LEP), Art. 12
-              </footer>
             </div>
 
-            <div className="quote-block" style={{ borderLeftColor: '#D4A843', backgroundColor: '#FDF8EE' }}>
-              <p className="text-base leading-relaxed mb-4">
-                "A assistência à saúde do preso e do internado, de caráter preventivo e
+            <div className="p-6 border-l-4 border-burgundy-cta bg-slate-50 rounded-r-xl">
+              <p className="font-semibold text-navy-900 mb-2">Artigo 14</p>
+              <p className="text-sm text-slate-600">
+                "A assistência à saúde do preso e do internado, de caráter preventivo e 
                 curativo, compreenderá <strong>atendimento médico, farmacêutico e odontológico</strong>."
               </p>
-              <footer className="text-sm font-semibold text-navy-700 not-italic">
-                — Lei nº 7.210/84 (LEP), Art. 14
-              </footer>
-            </div>
-
             <div className="mt-6 p-4 rounded-xl bg-navy-900 text-white">
               <p className="text-xs uppercase tracking-widest text-slate-300 mb-1">Dados do DEPEN (2023)</p>
               <p className="text-sm leading-relaxed text-slate-200">
