@@ -100,8 +100,8 @@ export default function DominoEffect() {
   const donationBoxes = Array.from({ length: 100 }).map((_, i) => {
     const yRand = Math.random();
     // Position safely BEHIND the leaning giant block (whose top reaches ~452)
-    // Pile is highest near the domino (y=440) and tapers off towards the back (y=520)
-    const yPos = 440 + yRand * 80; 
+    // Shifted further back to 470 so they don't fall "on top" of the domino
+    const yPos = 470 + yRand * 80; 
     const maxZ = (1 - yRand) * 150 + 20; 
     
     return {
