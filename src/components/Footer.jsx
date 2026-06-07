@@ -15,8 +15,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center mb-4">
-              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-16 w-auto opacity-90" />
+            <div className="bg-white p-2 rounded-xl inline-block mb-4 shadow-lg">
+              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-24 w-auto opacity-95" />
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
               Projeto de Extensão: Efeito Rebote.<br/>

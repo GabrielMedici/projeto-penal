@@ -38,8 +38,8 @@ export default function Header() {
         <div className="section-container flex items-center justify-between h-16 md:h-18 px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 no-underline">
-            <div className="flex items-center">
-              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-14 w-auto" />
+            <div className="flex items-center gap-3">
+              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-20 w-auto drop-shadow-md" />
             </div>
           </a>
 
