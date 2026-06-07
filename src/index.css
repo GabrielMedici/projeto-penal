@@ -454,8 +454,13 @@
 
 /* ===== PRINT STYLES (PDF EXPORT) ===== */
 @media print {
+  @page {
+    margin: 1cm;
+  }
+
   html, body {
-    background-color: var(--color-navy-900) !important;
+    background-color: #FAFAFA !important;
+    color: var(--color-navy-900) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -466,7 +471,10 @@
   }
 
   /* Force animations to complete state */
-  .animate-on-scroll {
+  .animate-on-scroll,
+  .animate-fade-in-up,
+  .animate-slide-in-right,
+  .animate-slide-in-left {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -474,9 +482,11 @@
   }
   
   /* Prevent page breaks inside important components */
-  .comparison-table,
+  .card-elevated,
+  .blockquote-styled,
   .rounded-2xl,
   .glass-card,
+  section,
   img,
   video {
     break-inside: avoid;
@@ -485,7 +495,14 @@
   
   /* Hide interactive elements not needed in PDF */
   button.btn-cta,
+  a[href^="#"], /* Hide navigation anchor links to keep PDF clean */
   .mobile-menu-overlay {
     display: none !important;
+  }
+
+  /* Fix spacing for print */
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
   }
 }
