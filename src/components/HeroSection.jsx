@@ -58,7 +58,7 @@ export default function HeroSection() {
             <img 
               src="/images/logo_efeito_rebote.png" 
               alt="Logo Efeito Rebote" 
-              className="w-48 md:w-80 lg:w-96 h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] relative z-10" 
+              className="w-64 md:w-96 lg:w-[32rem] h-auto drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] relative z-10 transform scale-110 md:scale-125 lg:scale-150" 
             />
           </div>
 
