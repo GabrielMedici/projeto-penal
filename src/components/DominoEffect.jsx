@@ -62,7 +62,7 @@ export default function DominoEffect() {
     setStage('saved');
     setTimeout(() => {
       setStage('eureka');
-    }, 2000); // Show modal after boxes fall
+    }, 4500); // Give user more time to admire the boxes holding the domino
   };
 
   const handleReset = () => {
