@@ -78,7 +78,7 @@ export default function TransparencySection() {
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-green-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
             Metodologia
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
@@ -111,7 +111,7 @@ export default function TransparencySection() {
                 className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 200} card-elevated relative`}
               >
                 {/* Step number badge */}
-                <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-green-cta text-white text-xs font-bold flex items-center justify-center shadow-lg">
+                <div className="absolute -top-4 left-6 w-8 h-8 rounded-full bg-burgundy-cta text-white text-xs font-bold flex items-center justify-center shadow-lg">
                   {step.number}
                 </div>
 
@@ -122,7 +122,7 @@ export default function TransparencySection() {
 
                 {/* Content */}
                 <h3 className="text-xl font-bold text-navy-900 mb-1">{step.title}</h3>
-                <p className="text-sm font-medium text-green-cta mb-3">{step.subtitle}</p>
+                <p className="text-sm font-medium text-burgundy-cta mb-3">{step.subtitle}</p>
                 <p className="text-sm leading-relaxed mb-5" style={{ color: '#64748B' }}>
                   {step.description}
                 </p>
@@ -131,7 +131,7 @@ export default function TransparencySection() {
                 <ul className="space-y-2">
                   {step.details.map((detail) => (
                     <li key={detail} className="flex items-start gap-2 text-sm" style={{ color: '#475569' }}>
-                      <CheckCircle size={14} className="text-green-cta mt-0.5 flex-shrink-0" />
+                      <CheckCircle size={14} className="text-burgundy-cta mt-0.5 flex-shrink-0" />
                       <span>{detail}</span>
                     </li>
                   ))}

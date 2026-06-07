@@ -38,12 +38,9 @@ export default function Header() {
         <div className="section-container flex items-center justify-between h-16 md:h-18 px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 no-underline">
-            <div className="w-10 h-10 rounded-lg border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-100/50">
-              <span className="text-slate-400 text-[8px] font-medium leading-tight text-center">Logo</span>
+            <div className="flex items-center">
+              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-14 w-auto" />
             </div>
-            <span className="text-navy-900 font-bold text-lg tracking-tight">
-              Efeito Rebote
-            </span>
           </a>
 
           {/* Desktop Nav */}
@@ -53,7 +50,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-navy-700 hover:text-navy-900 text-sm font-medium transition-colors duration-200 no-underline relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-green-cta after:transition-all after:duration-300 hover:after:w-full"
+                className="text-navy-700 hover:text-navy-900 text-sm font-medium transition-colors duration-200 no-underline relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-burgundy-cta after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -96,7 +93,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-navy-800 hover:text-green-cta text-base font-medium py-2 border-b border-slate-100 transition-colors no-underline"
+              className="text-navy-800 hover:text-burgundy-cta text-base font-medium py-2 border-b border-slate-100 transition-colors no-underline"
             >
               {link.label}
             </a>

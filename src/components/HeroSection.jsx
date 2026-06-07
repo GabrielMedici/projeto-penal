@@ -33,7 +33,7 @@ export default function HeroSection() {
           <div className="relative z-10">
             {/* Tag */}
             <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 mb-6">
-              <span className="w-2 h-2 rounded-full bg-green-cta animate-[pulse-soft_2s_ease-in-out_infinite]" />
+              <span className="w-2 h-2 rounded-full bg-burgundy-cta animate-[pulse-soft_2s_ease-in-out_infinite]" />
               <span className="text-white/80 text-xs font-medium uppercase tracking-widest">
                 3° Semestre · Direito Noturno, Turma B · UniCesumar
               </span>
@@ -105,13 +105,13 @@ export default function HeroSection() {
                 </video>
                 <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-navy-900/80 to-transparent" />
                 <span className="absolute bottom-3 left-4 text-xs font-semibold text-white uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-cta"></span>
+                  <span className="w-2 h-2 rounded-full bg-burgundy-cta"></span>
                   A Intervenção
                 </span>
               </div>
 
               {/* Divider line */}
-              <div className="h-[2px] bg-gradient-to-r from-green-cta via-gold-accent to-green-cta" />
+              <div className="h-[2px] bg-gradient-to-r from-burgundy-cta via-gold-accent to-burgundy-cta" />
 
               {/* Bottom: O Impacto (Problem) */}
               <div className="relative">

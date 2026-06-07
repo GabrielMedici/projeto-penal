@@ -15,13 +15,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg border-2 border-dashed border-white/30 flex items-center justify-center">
-                <span className="text-white/40 text-[8px] font-medium leading-tight text-center">Logo</span>
-              </div>
-              <span className="text-white font-bold text-lg tracking-tight">
-                Efeito Rebote
-              </span>
+            <div className="flex items-center mb-4">
+              <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-16 w-auto opacity-90" />
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
               Projeto acadêmico do 3° Semestre de Direito Noturno, Turma B — UniCesumar.

@@ -10,9 +10,9 @@
   --color-slate-100: #F1F5F9;
   --color-slate-200: #E2E8F0;
   --color-slate-300: #CBD5E1;
-  --color-green-cta: #009C3B;
-  --color-green-cta-hover: #007A2F;
-  --color-green-cta-light: #E6F7EE;
+  --color-burgundy-cta: #A31D33;
+  --color-burgundy-cta-hover: #801526;
+  --color-burgundy-cta-light: #3A0C16;
   --color-gold-accent: #D4A843;
   --color-gold-accent-light: #F5EDD4;
 
@@ -360,7 +360,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--color-green-cta), var(--color-slate-200));
+  background: linear-gradient(to bottom, var(--color-burgundy-cta), var(--color-slate-200));
   transform: translateX(-50%);
 }
 

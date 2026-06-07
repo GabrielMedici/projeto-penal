@@ -30,7 +30,7 @@ export default function FamilySection() {
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-green-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
             Amparo Familiar
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
@@ -61,7 +61,7 @@ export default function FamilySection() {
               </div>
               {/* Decorative element */}
               <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-2xl bg-gold-accent/10 border border-gold-accent/20 -z-10 hidden lg:block" />
-              <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-green-cta/10 border border-green-cta/20 -z-10 hidden lg:block" />
+              <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-burgundy-cta/10 border border-burgundy-cta/20 -z-10 hidden lg:block" />
             </div>
           </div>
 
@@ -83,8 +83,8 @@ export default function FamilySection() {
 
               {/* Impact cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                <div className="p-4 rounded-xl bg-green-cta-light text-center">
-                  <Heart size={24} className="text-green-cta mx-auto mb-2" />
+                <div className="p-4 rounded-xl bg-burgundy-cta-light text-center">
+                  <Heart size={24} className="text-burgundy-cta mx-auto mb-2" />
                   <p className="text-xs font-semibold text-navy-900">Proteção de Vínculos</p>
                 </div>
                 <div className="p-4 rounded-xl text-center" style={{ backgroundColor: '#F5EDD4' }}>

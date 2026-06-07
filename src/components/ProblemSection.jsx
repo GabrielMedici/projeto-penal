@@ -50,7 +50,7 @@ export default function ProblemSection() {
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-green-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
             O Contexto
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
@@ -74,8 +74,8 @@ export default function ProblemSection() {
                   key={point.title}
                   className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} card-elevated flex gap-5 items-start`}
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-cta/10 flex items-center justify-center">
-                    <Icon size={22} className="text-green-cta" />
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-burgundy-cta/10 flex items-center justify-center">
+                    <Icon size={22} className="text-burgundy-cta" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-navy-900 mb-2">{point.title}</h3>
