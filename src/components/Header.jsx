@@ -50,7 +50,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-navy-700 hover:text-navy-900 text-sm font-medium transition-colors duration-200 no-underline relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-burgundy-cta after:transition-all after:duration-300 hover:after:w-full"
+                className="text-navy-700 hover:text-navy-900 text-sm font-medium transition-colors duration-200 no-underline relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold-accent after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -93,7 +93,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-navy-800 hover:text-burgundy-cta text-base font-medium py-2 border-b border-slate-100 transition-colors no-underline"
+              className="text-navy-800 hover:text-gold-accent text-base font-medium py-2 border-b border-slate-100 transition-colors no-underline"
             >
               {link.label}
             </a>

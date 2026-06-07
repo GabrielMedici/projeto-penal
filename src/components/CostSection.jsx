@@ -170,7 +170,7 @@ export default function CostSection() {
                   <th>Indicador</th>
                   <th>
                     <span className="flex items-center gap-2">
-                      <CheckCircle size={14} className="text-burgundy-cta" />
+                      <CheckCircle size={14} className="text-gold-accent" />
                       Prevenção
                     </span>
                   </th>
@@ -192,7 +192,7 @@ export default function CostSection() {
                       )}
                     </td>
                     <td data-label="Prevenção">
-                      <span className="inline-flex items-center gap-1 text-burgundy-cta">
+                      <span className="inline-flex items-center gap-1 text-gold-accent">
                         <TrendingDown size={14} />
                         {row.prevention}
                       </span>
@@ -209,12 +209,12 @@ export default function CostSection() {
               </table>
             </div>
 
-            <div className="mt-6 p-4 rounded-xl bg-burgundy-cta/10 border border-burgundy-cta/20">
-              <p className="text-sm text-burgundy-cta leading-relaxed">
+            <div className="mt-6 p-4 rounded-xl bg-gold-accent/10 border border-gold-accent/20">
+              <p className="text-sm text-gold-accent leading-relaxed">
                 <strong>Conclusão:</strong> Cada R$ 1,00 investido em prevenção evita entre
                 R$ 110,00 e R$ 166,00 em custos emergenciais de saúde, escoltas e internações do SUS.
               </p>
-              <p className="text-xs text-burgundy-cta/80 mt-2 italic">
+              <p className="text-xs text-gold-accent/80 mt-2 italic">
                 Cálculo projetado: custo médio de agir apenas na crise (DEPEN/INFOPEN 2023 + MS/DataSUS 2022) ÷ custo preventivo (pesquisa de mercado local, 2024).
               </p>
             </div>

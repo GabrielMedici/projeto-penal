@@ -38,10 +38,11 @@ export default function Footer() {
                 { label: 'Transparência', href: '#transparencia' },
               ].map((link) => (
                 <a
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
-                  className="text-slate-300 hover:text-white text-sm transition-colors no-underline"
+                  className="text-slate-300 hover:text-gold-accent text-sm transition-colors no-underline flex items-center gap-2 group"
                 >
+                  <span className="w-1 h-1 rounded-full bg-gold-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                   {link.label}
                 </a>
               ))}
