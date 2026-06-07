@@ -11,8 +11,8 @@ export default function Footer() {
       <div className="section-container px-6 flex flex-col items-center text-center">
         
         {/* Logo */}
-        <div className="mb-6">
-          <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-24 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <div className="mb-6 bg-white p-3 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)] inline-block">
+          <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-20 w-auto opacity-95 hover:opacity-100 transition-opacity" />
         </div>
 
         {/* Academic Text */}

@@ -56,10 +56,12 @@ export default function HeroSection() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-amber-500/10 rounded-full animate-[spin_30s_linear_reverse_infinite] pointer-events-none"></div>
             
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
+              {/* White Backplate Shield */}
+              <div className="absolute w-[95%] aspect-square bg-white rounded-full scale-125 z-0 shadow-inner"></div>
               <img 
                 src="/images/logo_efeito_rebote.png" 
                 alt="Logo Efeito Rebote" 
-                className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] scale-125" 
+                className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.4)] scale-125 relative z-10" 
               />
             </div>
           </div>
