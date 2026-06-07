@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { TrendingDown, RotateCcw, Heart, Play, AlertTriangle } from 'lucide-react';
 
 const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
@@ -37,27 +37,27 @@ const Block3D = ({ w, h, d, colors, isGiant, label, isDonation }) => {
 };
 
 export default function DominoEffect() {
-  // 'idle', 'cascade', 'frozen', 'collapse', 'saved', 'eureka'
   const [stage, setStage] = useState('idle'); 
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { amount: 0.3 });
 
   // Cinematic Gameplay Loop
   useEffect(() => {
     let timer;
     if (stage === 'idle') {
-      timer = setTimeout(() => setStage('cascade'), 1000);
+      if (isInView) {
+        timer = setTimeout(() => setStage('cascade'), 600);
+      }
     } else if (stage === 'cascade') {
-      // Third domino (Infecções) starts falling at 400ms.
-      // We change to 'frozen' stage to trigger the button UI and the 3-second countdown early.
-      timer = setTimeout(() => setStage('frozen'), 400); 
+      // Third domino starts falling slightly earlier to sync with new faster speeds
+      timer = setTimeout(() => setStage('frozen'), 250); 
     } else if (stage === 'frozen') {
-      // User has 3 seconds to click Donate while the rest of the cascade is still falling!
       timer = setTimeout(() => setStage('collapse'), 3000);
     } else if (stage === 'collapse' || stage === 'eureka') {
-      // Reset the scene 6 seconds after the outcome
       timer = setTimeout(() => setStage('idle'), 6000);
     }
     return () => clearTimeout(timer);
-  }, [stage]);
+  }, [stage, isInView]);
 
   const handleDonate = () => {
     setStage('saved');
@@ -87,14 +87,14 @@ export default function DominoEffect() {
   };
 
   // Block definitions carefully measured to fall FORWARDS (towards the background)
-  // Wider stagger (0.2s) with gravity tween for a fluid, continuous wave
+  // Faster stagger with gravity tween for a fluid, continuous wave
   const blocks = [
     { id: 0, bottom: 20, w: 25, h: 50, d: 8, label: "Sem Kits", isGiant: false, delay: 0, cascadeAngle: -15, savedAngle: -20, collapseAngle: 0 },
-    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.2, cascadeAngle: -25, savedAngle: -30, collapseAngle: -2 },
-    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.4, cascadeAngle: -35, savedAngle: -40, collapseAngle: -4 },
-    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.6, cascadeAngle: -45, savedAngle: -50, collapseAngle: -6 },
-    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.8, cascadeAngle: -55, savedAngle: -60, collapseAngle: -8 },
-    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 1.0, cascadeAngle: -65, savedAngle: -70, collapseAngle: -10 },
+    { id: 1, bottom: 55, w: 32, h: 70, d: 10, label: "Sarna/Piolho", isGiant: false, delay: 0.12, cascadeAngle: -25, savedAngle: -30, collapseAngle: -2 },
+    { id: 2, bottom: 105, w: 42, h: 95, d: 14, label: "Infecções", isGiant: false, delay: 0.24, cascadeAngle: -35, savedAngle: -40, collapseAngle: -4 },
+    { id: 3, bottom: 170, w: 55, h: 130, d: 18, label: "Processos", isGiant: false, delay: 0.36, cascadeAngle: -45, savedAngle: -50, collapseAngle: -6 },
+    { id: 4, bottom: 250, w: 70, h: 170, d: 24, label: "Hospitais", isGiant: false, delay: 0.48, cascadeAngle: -55, savedAngle: -60, collapseAngle: -8 },
+    { id: 5, bottom: 360, w: 90, h: 220, d: 30, label: "R$ 5.000+ / Colapso", isGiant: true, delay: 0.6, cascadeAngle: -65, savedAngle: -70, collapseAngle: -10 },
   ];
 
   // Generate 100 donation boxes for a massive, professional rain effect
@@ -119,7 +119,7 @@ export default function DominoEffect() {
   });
 
   return (
-    <section className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[900px] flex flex-col justify-center">
+    <section ref={containerRef} className="relative w-full py-24 bg-slate-950 overflow-hidden border-y border-amber-500/10 min-h-[900px] flex flex-col justify-center">
       
       {/* Background ambient light */}
       <motion.div 
