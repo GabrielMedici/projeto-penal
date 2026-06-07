@@ -67,7 +67,7 @@ export default function ProblemSection() {
               <Activity size={26} className="text-gold-accent" />
             </div>
             <div>
-              <div className="text-7xl lg:text-8xl font-black text-gold-accent mb-4 glow-amber-text">166x</div>
+              <div className="text-6xl sm:text-7xl lg:text-8xl font-black text-gold-accent mb-4 glow-amber-text break-words">166x</div>
               <h3 className="text-2xl font-bold text-white mb-3">Omissão Estatal</h3>
               <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
                 A falha estrutural no fornecimento do mínimo existencial cria um ciclo vicioso, exigindo intervenções reativas de alto custo a médio e longo prazo.
@@ -110,8 +110,8 @@ export default function ProblemSection() {
                 A superlotação e a insuficiência orçamentária frequentemente convertem a privação de liberdade em degradação sanitária.
               </p>
             </div>
-            <div className="text-right">
-              <div className="text-6xl lg:text-7xl font-black text-burgundy-cta mb-2 drop-shadow-[0_0_15px_rgba(139,28,49,0.5)]">+200k</div>
+            <div className="text-left sm:text-right">
+              <div className="text-5xl sm:text-6xl lg:text-7xl font-black text-burgundy-cta mb-2 drop-shadow-[0_0_15px_rgba(139,28,49,0.5)] break-words">+200k</div>
               <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Déficit de Vagas</div>
             </div>
           </div>

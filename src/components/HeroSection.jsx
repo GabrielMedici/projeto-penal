@@ -24,7 +24,7 @@ export default function HeroSection() {
 
             {/* Title */}
             <div className="flex flex-col mb-6">
-              <h1 className="animate-fade-in-up delay-100 text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight shrink-0">
+              <h1 className="animate-fade-in-up delay-100 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight shrink-0">
                 EFEITO
                 <br />
                 <span className="text-gold-accent glow-amber-text">REBOTE</span>
