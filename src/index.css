@@ -2,21 +2,26 @@
 
 /* ===== DESIGN TOKENS (Tailwind v4 CSS-first config) ===== */
 @theme {
-  --color-navy-900: #0A1628;
-  --color-navy-800: #132240;
+  --color-navy-900: #060D1A;
+  --color-navy-800: #0f1a2e;
   --color-navy-700: #1B3A5C;
   --color-navy-600: #264A73;
   --color-slate-50: #F8FAFC;
   --color-slate-100: #F1F5F9;
   --color-slate-200: #E2E8F0;
   --color-slate-300: #CBD5E1;
-  --color-burgundy-cta: #A31D33;
+  --color-burgundy-cta: #8B1C31;
   --color-burgundy-cta-hover: #801526;
   --color-burgundy-cta-light: #3A0C16;
-  --color-gold-accent: #D4A843;
-  --color-gold-accent-light: #F5EDD4;
+  --color-gold-accent: #D4AF37;
+  --color-gold-accent-light: rgba(212, 175, 55, 0.4);
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
+
+  --animate-pulse-soft: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-breathe: breathe 8s ease-in-out infinite;
 }
 
 /* ===== BASE RESETS ===== */
@@ -138,38 +143,50 @@
   opacity: 1;
 }
 
-/* ===== GLASSMORPHISM HEADER ===== */
-.glass-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+/* ===== OBSIDIAN & AMBER UTILITIES ===== */
+.obsidian-card {
+  background: linear-gradient(145deg, rgba(15, 26, 46, 0.8), rgba(6, 13, 26, 0.95));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.3); /* Thin warm amber border */
   border-radius: 1.5rem;
-  box-shadow: 0 20px 40px -10px rgba(10, 22, 40, 0.08);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
   transition: all 0.3s ease;
 }
 
-.glass-card:hover {
-  box-shadow: 0 30px 60px -12px rgba(10, 22, 40, 0.12);
+.obsidian-card:hover {
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.1);
   transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.6);
 }
 
-.glass-card-highlight {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(253, 248, 238, 0.95));
-  border: 1px solid var(--color-gold-accent-light);
-  box-shadow: 0 20px 40px -10px rgba(212, 168, 67, 0.15);
+.glow-amber-text {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
-/* Base card component */
+.btn-cta-amber {
+  background: var(--color-burgundy-cta);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px -5px rgba(139, 28, 49, 0.4);
+}
+
+.btn-cta-amber:hover {
+  background: #a1233a;
+  box-shadow: 0 15px 40px -5px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Base card component (For Light Mode Sections) */
 .card-elevated {
   background: white;
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -5px rgba(10, 22, 40, 0.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .card-elevated:hover {
-  box-shadow: 0 25px 50px -12px rgba(10, 22, 40, 0.15);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
   transform: translateY(-6px);
 }
 

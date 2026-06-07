@@ -44,6 +44,20 @@ const steps = [
       'Mais de 8.000 itens arrecadados',
     ],
   },
+  {
+    icon: ClipboardCheck,
+    number: '04',
+    title: 'Auditoria Acadêmica',
+    subtitle: 'Rastreabilidade total',
+    description:
+      'Validação de todo o processo pelo corpo docente, assegurando que os recursos aplicados tiveram o impacto previsto.',
+    details: [
+      'Documentação comprobatória',
+      'Certificação pelo corpo docente',
+      'Relatório final de impacto social',
+      'Publicização dos resultados',
+    ],
+  },
 ];
 
 export default function TransparencySection() {
@@ -66,72 +80,62 @@ export default function TransparencySection() {
   }, []);
 
   return (
-    <section id="transparencia" ref={sectionRef} className="py-24 bg-navy-900 relative">
-      <div className="section-container">
+    <section id="transparencia" ref={sectionRef} className="py-24 bg-slate-950 relative border-t border-amber-500/10">
+      <div className="section-container px-6">
         {/* Section header */}
-        <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-gold-accent text-sm font-semibold uppercase tracking-widest mb-3">
-            Metodologia
+        <div className="text-center mb-20 animate-on-scroll animate-fade-in-up">
+          <span className="inline-block text-gold-accent text-sm font-bold uppercase tracking-widest mb-3 glow-amber-text">
+            Transparência
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-            Transparência em cada etapa
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">
+            Metodologia <span className="text-slate-400">&</span> Logística
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-300">
-            Cada fase da intervenção é documentada e auditável, garantindo a
-            rastreabilidade completa dos recursos aplicados.
-          </p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connector line (desktop only) */}
-          <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-[2px]">
-            <div
-              className="w-full h-full"
-              style={{
-                background: 'linear-gradient(90deg, transparent, #D4A843, transparent)',
-                opacity: 0.3,
-              }}
-            />
-          </div>
-
-          {steps.map((step, i) => {
+        {/* 2x2 Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div
                 key={step.title}
-                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 200} bg-navy-800 rounded-2xl p-8 border border-white/5 shadow-xl relative z-10`}
+                className={`obsidian-card p-8 animate-on-scroll animate-fade-in-up delay-${(index + 1) * 100}`}
               >
-                {/* Icon in place of number */}
-                <div className="w-16 h-16 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mx-auto mb-6">
-                  <Icon size={32} className="text-gold-accent" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Icon size={24} className="text-gold-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-1">{step.title}</h3>
+                    <p className="text-xs uppercase tracking-widest text-slate-400 font-bold">
+                      {step.subtitle}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Content */}
-                <h3 className="text-xl font-bold text-white mb-1 text-center">{step.title}</h3>
-                <p className="text-sm font-medium text-gold-accent mb-4 text-center">{step.subtitle}</p>
-                <p className="text-sm leading-relaxed mb-6 text-slate-300 text-center">
+                <p className="text-slate-300 text-base leading-relaxed mb-6">
                   {step.description}
                 </p>
 
-                {/* Details list */}
-                <ul className="space-y-3">
-                  {step.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3 text-sm text-slate-400">
-                      <CheckCircle size={16} className="text-gold-accent flex-shrink-0 mt-0.5" />
-                      <span>{detail}</span>
+                <ul className="space-y-4">
+                  {step.details.map((detail, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="mt-1 flex-shrink-0">
+                        <CheckCircle size={16} className="text-gold-accent" />
+                      </div>
+                      <span className="text-sm font-medium text-slate-300 leading-snug">
+                        {detail}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
             );
           })}
-        </div>
-
-        {/* Academic closing */}
-        <div className="animate-on-scroll animate-fade-in-up delay-600 text-center mt-16">
-          <div className="inline-block p-8 rounded-2xl bg-navy-900 text-white max-w-2xl">
-            <h3 className="text-2xl font-bold mb-3">Metodologia auditável e replicável</h3>
+          
+          {/* Academic closing */}
+          <div className="obsidian-card p-8 animate-on-scroll animate-fade-in-up delay-400 md:col-span-2">
+            <h3 className="text-2xl font-bold mb-3 text-white">Metodologia auditável e replicável</h3>
             <p className="text-slate-300 text-base leading-relaxed">
               Todo o processo é documentado com registros fotográficos, relatórios de prestação
               de contas e acompanhamento pós-entrega — garantindo transparência total e

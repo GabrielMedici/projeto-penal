@@ -41,79 +41,81 @@ export default function ProblemSection() {
   }, []);
 
   return (
-    <section id="problema" ref={sectionRef} className="py-24 bg-white relative">
-      <div className="section-container">
+    <section id="problema" ref={sectionRef} className="py-24 bg-slate-950 relative">
+      <div className="section-container px-6">
         {/* Section header */}
         <div className="text-center mb-16 animate-on-scroll animate-fade-in-up">
-          <span className="inline-block text-burgundy-cta text-sm font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-gold-accent text-sm font-bold uppercase tracking-widest mb-3 glow-amber-text">
             O Contexto
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">
             A lacuna na assistência material
             <br />
-            <span className="text-navy-700">e o seu custo sistêmico</span>
+            <span className="text-slate-400">e o seu custo sistêmico</span>
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg font-medium">
             A análise dos dados revela um ciclo previsível: a falha na assistência material básica gera gastos muito maiores para o bolso do cidadão.
           </p>
         </div>
 
-        {/* Grid: Points */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {keyPoints.map((point, i) => {
-            const Icon = point.icon;
-            return (
-              <div
-                key={point.title}
-                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} card-elevated p-8 flex flex-col gap-5`}
-              >
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-burgundy-cta/10 flex items-center justify-center">
-                  <Icon size={22} className="text-burgundy-cta" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-navy-900 mb-2">{point.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {point.text}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Legal Foundation */}
-        <div className="animate-on-scroll animate-fade-in-up delay-400">
-          <h3 className="text-2xl font-bold text-navy-900 mb-6 flex items-center justify-center gap-3">
-            <Scale className="text-burgundy-cta" size={28} />
-            Fundamentação Legal (LEP)
-          </h3>
+        {/* Bento Box Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 border-l-4 border-navy-800 bg-white shadow-md rounded-r-xl">
-              <p className="font-semibold text-navy-900 mb-2">Artigo 12</p>
-              <p className="text-sm text-slate-600">
-                "A assistência material ao preso e ao internado consistirá no fornecimento de alimentação, 
-                vestuário e <strong>instalações higiênicas</strong>."
-              </p>
+          {/* Main Massive Card (Spans 2 columns) */}
+          <div className="obsidian-card md:col-span-2 p-10 flex flex-col justify-between animate-on-scroll animate-fade-in-up">
+            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mb-8">
+              <Activity size={26} className="text-gold-accent" />
             </div>
-
-            <div className="p-6 border-l-4 border-navy-800 bg-white shadow-md rounded-r-xl">
-              <p className="font-semibold text-navy-900 mb-2">Artigo 14</p>
-              <p className="text-sm text-slate-600">
-                "A assistência à saúde do preso e do internado, de caráter preventivo e 
-                curativo, compreenderá <strong>atendimento médico, farmacêutico e odontológico</strong>."
-              </p>
-            </div>
-            
-            <div className="mt-6 p-6 rounded-xl bg-navy-900 text-white shadow-xl md:col-span-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-gold-accent mb-2">Déficit Estrutural</p>
-              <p className="text-sm leading-relaxed text-slate-200">
-                O Brasil possui um déficit que supera <strong className="text-white">200 mil postos</strong>. 
-                A superlotação e a insuficiência orçamentária frequentemente convertem a privação de liberdade 
-                em degradação sanitária.
+            <div>
+              <div className="text-7xl lg:text-8xl font-black text-gold-accent mb-4 glow-amber-text">166x</div>
+              <h3 className="text-2xl font-bold text-white mb-3">Omissão Estatal</h3>
+              <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
+                A falha estrutural no fornecimento do mínimo existencial cria um ciclo vicioso, exigindo intervenções reativas de alto custo a médio e longo prazo.
               </p>
             </div>
           </div>
+
+          {/* Secondary Tall Card */}
+          <div className="obsidian-card p-10 flex flex-col justify-between animate-on-scroll animate-fade-in-up delay-100">
+            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-burgundy-cta/20 border border-burgundy-cta/30 flex items-center justify-center mb-8">
+              <ShieldAlert size={26} className="text-burgundy-cta" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3">A Lacuna Assistencial</h3>
+              <p className="text-slate-300 text-base leading-relaxed">
+                A ausência de assistência material adequada aos apenados, especialmente no que tange ao fornecimento de itens básicos de higiene, desencadeia o chamado efeito rebote na execução penal.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Card 1 */}
+          <div className="obsidian-card p-10 flex flex-col justify-between animate-on-scroll animate-fade-in-up delay-200">
+            <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gold-accent/10 border border-gold-accent/20 flex items-center justify-center mb-8">
+              <Briefcase size={26} className="text-gold-accent" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-3">Inteligência Preventiva</h3>
+              <p className="text-slate-300 text-base leading-relaxed">
+                A aquisição preventiva de kits básicos de higiene é irrisória quando confrontada com o ônus da gestão de crises com saúde e escoltas externas.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Card 2 (Massive Number 200 mil) */}
+          <div className="obsidian-card md:col-span-2 p-10 flex flex-col sm:flex-row gap-8 justify-between items-center animate-on-scroll animate-fade-in-up delay-300">
+            <div className="flex-1">
+              <p className="text-sm font-bold uppercase tracking-widest text-gold-accent mb-2">Déficit Estrutural</p>
+              <h3 className="text-xl font-bold text-white mb-3">Superlotação e Degradação</h3>
+              <p className="text-slate-300 text-base leading-relaxed">
+                A superlotação e a insuficiência orçamentária frequentemente convertem a privação de liberdade em degradação sanitária.
+              </p>
+            </div>
+            <div className="text-right">
+              <div className="text-6xl lg:text-7xl font-black text-burgundy-cta mb-2 drop-shadow-[0_0_15px_rgba(139,28,49,0.5)]">+200k</div>
+              <div className="text-sm font-bold text-slate-400 uppercase tracking-widest">Déficit de Vagas</div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </section>
