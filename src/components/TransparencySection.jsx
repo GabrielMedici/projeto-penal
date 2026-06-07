@@ -10,11 +10,10 @@ const steps = [
     description:
       'Levantamento criterioso dos itens de higiene pessoal autorizados pela administração penitenciária, em conformidade com as normativas de segurança vigentes.',
     details: [
-      'Sabonete neutro',
-      'Creme dental e escova',
-      'Papel higiênico',
-      'Absorventes (ala feminina)',
-      'Itens aprovados pela direção da UP',
+      'Aparelho de barbear descartável (duas lâminas)',
+      'Escova dental simples',
+      'Creme dental branco (limite de 100g)',
+      'Detergente (acondicionado em frasco transparente)',
     ],
   },
   {
@@ -23,13 +22,12 @@ const steps = [
     title: 'Logística',
     subtitle: 'Distribuição coordenada',
     description:
-      'Operação logística com suporte institucional, garantindo a entrega segura e documentada nas unidades prisionais participantes.',
+      'Translado das doações até a PEM, CCM e CPIM utilizando veículos oficiais da universidade.',
     details: [
       'PEM — Penitenciária Estadual de Maringá',
       'CCM — Cadeia de Custódia de Maringá',
       'CPIM — Centro de Prog. e Integração',
-      'Transporte documentado',
-      'Protocolos de segurança atendidos',
+      'Veículos oficiais universitários',
     ],
   },
   {
@@ -38,13 +36,12 @@ const steps = [
     title: 'Entrega',
     subtitle: 'Visita técnica documentada',
     description:
-      'Entrega acompanhada por visita técnica, com registro fotográfico e prestação de contas pública, garantindo total transparência do processo.',
+      'Prestação de contas contendo o registro fotográfico e o quantitativo exato arrecadado, superando a meta de 8.000 itens.',
     details: [
       'Visita técnica presencial',
       'Registro fotográfico documentado',
-      'Relatório de prestação de contas',
-      'Publicação dos resultados',
-      'Acompanhamento pós-entrega',
+      'Prestação de contas detalhada',
+      'Mais de 8.000 itens arrecadados',
     ],
   },
 ];

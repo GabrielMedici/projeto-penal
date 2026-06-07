@@ -140,17 +140,37 @@
 
 /* ===== GLASSMORPHISM HEADER ===== */
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -5px rgba(10, 22, 40, 0.05);
+  box-shadow: 0 20px 40px -10px rgba(10, 22, 40, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 30px 60px -12px rgba(10, 22, 40, 0.12);
+  transform: translateY(-4px);
 }
 
 .glass-card-highlight {
-  border-color: var(--color-gold-accent);
-  box-shadow: 0 0 20px rgba(212, 168, 67, 0.1);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(253, 248, 238, 0.95));
+  border: 1px solid var(--color-gold-accent-light);
+  box-shadow: 0 20px 40px -10px rgba(212, 168, 67, 0.15);
+}
+
+/* Base card component */
+.card-elevated {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -5px rgba(10, 22, 40, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-elevated:hover {
+  box-shadow: 0 25px 50px -12px rgba(10, 22, 40, 0.15);
+  transform: translateY(-6px);
 }
 
 .glass-header {

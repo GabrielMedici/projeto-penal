@@ -1,21 +1,21 @@
 import { useEffect, useRef } from 'react';
-import { BookOpen, Scale, ShieldCheck } from 'lucide-react';
+import { BookOpen, Scale, ShieldCheck, ShieldAlert, Activity, Briefcase } from 'lucide-react';
 
 const keyPoints = [
   {
-    icon: BookOpen,
-    title: 'Lacuna Assistencial',
-    text: 'A Lei de Execução Penal (Art. 12) assegura assistência material ao preso. Na prática, a insuficiência de recursos gera um vácuo que potencializa riscos sanitários e compromete a eficiência do sistema.',
+    icon: ShieldAlert,
+    title: 'A Lacuna Assistencial',
+    text: 'A ausência de assistência material adequada aos apenados, especialmente no que tange ao fornecimento de itens básicos de higiene, desencadeia o chamado efeito rebote na execução penal.',
   },
   {
-    icon: Scale,
-    title: 'Visão Criminológica',
-    text: 'Estudos demonstram que condições dignas de cumprimento de pena estão diretamente correlacionadas a menores índices de reincidência. A prevenção é, portanto, instrumento de política pública eficaz.',
+    icon: Activity,
+    title: 'Omissão Estatal',
+    text: 'A falha estrutural no fornecimento do mínimo existencial cria um ciclo vicioso, exigindo intervenções reativas de alto custo a médio e longo prazo.',
   },
   {
-    icon: ShieldCheck,
+    icon: Briefcase,
     title: 'Inteligência Preventiva',
-    text: 'A abordagem preventiva reduz custos emergenciais, melhora indicadores de saúde pública intramuros e otimiza a alocação de recursos do Estado na gestão penitenciária.',
+    text: 'A aquisição preventiva de kits básicos de higiene é irrisória quando confrontada com o ônus da gestão de crises com saúde e escoltas externas.',
   },
 ];
 
@@ -65,7 +65,7 @@ export default function ProblemSection() {
             return (
               <div
                 key={point.title}
-                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} bg-slate-50 p-8 rounded-2xl flex flex-col gap-5`}
+                className={`animate-on-scroll animate-fade-in-up delay-${(i + 1) * 100} card-elevated p-8 flex flex-col gap-5`}
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-burgundy-cta/10 flex items-center justify-center">
                   <Icon size={22} className="text-burgundy-cta" />
@@ -89,26 +89,28 @@ export default function ProblemSection() {
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 border-l-4 border-burgundy-cta bg-slate-50 rounded-r-xl">
+            <div className="p-6 border-l-4 border-navy-800 bg-white shadow-md rounded-r-xl">
               <p className="font-semibold text-navy-900 mb-2">Artigo 12</p>
               <p className="text-sm text-slate-600">
                 "A assistência material ao preso e ao internado consistirá no fornecimento de alimentação, 
-                <strong> vestuário e instalações higiênicas</strong>."
+                vestuário e <strong>instalações higiênicas</strong>."
               </p>
             </div>
 
-            <div className="p-6 border-l-4 border-burgundy-cta bg-slate-50 rounded-r-xl">
+            <div className="p-6 border-l-4 border-navy-800 bg-white shadow-md rounded-r-xl">
               <p className="font-semibold text-navy-900 mb-2">Artigo 14</p>
               <p className="text-sm text-slate-600">
                 "A assistência à saúde do preso e do internado, de caráter preventivo e 
                 curativo, compreenderá <strong>atendimento médico, farmacêutico e odontológico</strong>."
               </p>
             </div>
-            <div className="mt-6 p-4 rounded-xl bg-navy-900 text-white">
-              <p className="text-xs uppercase tracking-widest text-slate-300 mb-1">Dados do DEPEN (2023)</p>
+            
+            <div className="mt-6 p-6 rounded-xl bg-navy-900 text-white shadow-xl md:col-span-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-gold-accent mb-2">Déficit Estrutural</p>
               <p className="text-sm leading-relaxed text-slate-200">
-                O déficit de vagas no sistema prisional brasileiro supera <strong className="text-white">200 mil</strong>.
-                A superlotação agrava exponencialmente os custos com saúde emergencial.
+                O Brasil possui um déficit que supera <strong className="text-white">200 mil postos</strong>. 
+                A superlotação e a insuficiência orçamentária frequentemente convertem a privação de liberdade 
+                em degradação sanitária.
               </p>
             </div>
           </div>

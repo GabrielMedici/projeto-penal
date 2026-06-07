@@ -35,20 +35,18 @@ export default function HeroSection() {
             </div>
 
             {/* Subtitle */}
-            <p className="animate-fade-in-up delay-200 text-xl md:text-2xl text-burgundy-cta font-semibold leading-snug max-w-xl mb-6">
-              Como a falta do mínimo existencial no cárcere financia facções e pune as famílias.
+            <p className="animate-fade-in-up delay-200 text-xl md:text-2xl text-burgundy-cta font-bold leading-snug max-w-xl mb-6">
+              O Custo da Reincidência e a Falha na Assistência Material.
             </p>
-            <p className="animate-fade-in-up delay-300 text-base md:text-lg text-slate-600 leading-relaxed max-w-xl mb-10">
-              Inteligência preventiva aplicada ao sistema prisional: quando{' '}
-              <strong className="text-navy-900">R$&nbsp;30 a R$&nbsp;45 em higiene</strong> evitam{' '}
-              <strong className="text-burgundy-cta">R$&nbsp;5.000 em crises de saúde pública</strong>.
+            <p className="animate-fade-in-up delay-300 text-base md:text-lg text-slate-700 font-medium leading-relaxed max-w-xl mb-10">
+              Um fenômeno que eleva os problemas sanitários no cárcere, sobrecarrega financeiramente as famílias e gera custos públicos infinitamente superiores aos investimentos preventivos necessários.
             </p>
 
             {/* CTA */}
             <div className="animate-fade-in-up delay-400 flex flex-col sm:flex-row gap-4">
-              <a href="#problema" className="btn-cta bg-navy-900 text-white hover:bg-navy-800 shadow-xl border-none">
+              <a href="#problema" className="btn-cta bg-navy-900 text-white hover:bg-navy-800 shadow-2xl hover:shadow-navy-900/40 border-none transform transition-transform hover:-translate-y-1">
                 <BookOpen size={18} />
-                Conheça a Pesquisa
+                Conheça o Projeto
               </a>
             </div>
           </div>

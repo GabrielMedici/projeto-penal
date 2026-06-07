@@ -19,9 +19,9 @@ export default function Footer() {
               <img src="/images/logo_efeito_rebote.png" alt="Logo Efeito Rebote" className="h-16 w-auto opacity-90" />
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Projeto acadêmico do 3° Semestre de Direito Noturno, Turma B — UniCesumar.
-              Intervenção preventiva no sistema prisional, fundamentada na Lei de Execução
-              Penal e em evidências de eficiência administrativa.
+              Projeto de Extensão: Efeito Rebote.<br/>
+              Curso de Direito - 3º Semestre Noturno, Turma B.<br/>
+              Centro Universitário Cesumar (UniCesumar) - Maringá/PR - 2026.
             </p>
           </div>
 
