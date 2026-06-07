@@ -103,6 +103,7 @@ export default function ProblemSection() {
                 "A assistência à saúde do preso e do internado, de caráter preventivo e 
                 curativo, compreenderá <strong>atendimento médico, farmacêutico e odontológico</strong>."
               </p>
+            </div>
             <div className="mt-6 p-4 rounded-xl bg-navy-900 text-white">
               <p className="text-xs uppercase tracking-widest text-slate-300 mb-1">Dados do DEPEN (2023)</p>
               <p className="text-sm leading-relaxed text-slate-200">
